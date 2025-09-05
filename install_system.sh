@@ -145,7 +145,7 @@ sudo -u fuis18 bash -c 'yay -S swayimg'
 echo ""
 echo -e "${GREEN}==== Addicional Pluggins ===="
 echo -e "${RESET}"
-pacman -S --noconfirm bat lsd fzf
+pacman -S --noconfirm bat lsd fzf gnu-free-fonts
 
 echo ""
 echo -e "${GREEN}==== Copiying My Files ===="

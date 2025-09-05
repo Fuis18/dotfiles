@@ -80,7 +80,7 @@ echo -e "${GREEN}==== Agreegando Customizaciones ===="
 echo -e "${BLUE}===================================="
 echo -e "${RESET}"
 
-# cp -r Wallpapaers .
+# Wallpapaers
 
 echo "==== Fonts ===="
 mkdir -p "${USER_HOME}/Downloads"
