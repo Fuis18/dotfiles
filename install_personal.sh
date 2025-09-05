@@ -10,6 +10,7 @@ fi
 USER_NAME="fuis18"
 USER_HOME="/home/${USER_NAME}"
 USER_REPOS="${USER_HOME}/Desktop/repos"
+FUIS_REPO="${USER_REPOS}/fuis18/dotfiles"
 
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
@@ -90,6 +91,21 @@ unzip "${USER_HOME}/Downloads/FiraCode.zip"
 fc-cache -fv
 
 git clone https://github.com/NvChad/starter ~/.config/nvim
+# sudo -u "${USER_NAME}" nvim --headless +MasonInstallAll +qall
+
+echo ""
+echo -e "${BLUE}========================"
+echo -e "${GREEN}==== Agreegando Red ===="
+echo -e "${BLUE}========================"
+echo -e "${RESET}"
+
+sudo pacman -S cifs-utils
+smbclient -L //192.168.0.3 -U 'DESKTOP-EE2OA6G\usuario'
+sudo mkdir -p /mnt/web
+
+echo "//192.168.0.3/Web /mnt/web -o username=usuario,password=luis18,domain=DESKTOP-EE2OA6G,vers=3.0,uid=$(id -u),gid=$(id -g),file_mode=0777,dir_mode=0777" >> /etc/fstab
+
+sudo mount -a
 
 echo ""
 echo -e "${BLUE}=================================="
