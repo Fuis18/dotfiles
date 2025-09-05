@@ -10,6 +10,7 @@ fi
 USER_NAME="fuis18"
 USER_HOME="/home/${USER_NAME}"
 USER_REPOS="${USER_HOME}/Desktop/repos"
+FUIS_REPO="${USER_REPOS}/fuis18/dotfiles"
 
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
