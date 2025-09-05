@@ -23,9 +23,12 @@ station wlan0 connect "Your_wifi"
 - cd Desktop
 - mkdir repos
 - cd repos
-- git clone https://github.com/Fuis18/Fuis18.git
-- cd Fuis18
-- sudo bash install.sh
+- mkdir fuis18
+- cd fuis18
+- git clone https://github.com/Fuis18/dotfiles.git
+- cd dotfiles
+- sudo bash install_system.sh
+- sudo bash install_personal.sh
 
 ## PACKAGES
 
