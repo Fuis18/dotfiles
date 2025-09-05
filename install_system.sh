@@ -148,6 +148,28 @@ echo -e "${RESET}"
 pacman -S --noconfirm bat lsd fzf
 
 echo ""
+echo -e "${GREEN}==== Copiying My Files ===="
+echo -e "${RESET}"
+
+cp -r "${FUIS_REPO}/config/." "${USER_HOME}/.config/"
+chown -R "${USER_NAME}:${USER_NAME}" "${USER_HOME}/.config"
+
+cp -r "${FUIS_REPO}/zshrc" "${USER_HOME}/"
+mv "${USER_HOME}/zshrc" "${USER_HOME}/.zshrc"
+
+find "${USER_HOME}/.config/hypr/scripts/" -type f -name "*.sh" -exec chmod +x {} \;
+
+echo ""
+echo -e "${GREEN}==== Copiying Root Files ===="
+echo -e "${RESET}"
+
+cp -r "${FUIS_REPO}/root/config/." /root/.config/
+
+cp -r "${FUIS_REPO}/root/zshrc" /root/
+mv /root/zshrc /root/.zshrc
+
+
+echo ""
 echo -e "${GREEN}=== Actualizando el Shell ==="
 echo -e "${RESET}"
 
