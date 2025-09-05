@@ -67,7 +67,7 @@ sudo -u fuis18 bash -c 'paru -S ueberzugpp scrub cmatrix-git'
 echo ""
 echo -e "${GREEN}=== yay's Dependencies ==="
 echo -e "${RESET}"
-sudo -u fuis18 bash -c 'yay -S librewolf'
+sudo -u fuis18 bash -c 'yay -S librewolf-bin'
 
 echo ""
 echo -e "${GREEN}==== Other Pluggins ===="
