@@ -137,7 +137,6 @@ echo -e "${GREEN}=== paru's Dependencies ==="
 echo -e "${RESET}"
 sudo -u fuis18 bash -c 'paru -S lf wlogout yofi-bin'
 
-
 echo ""
 echo -e "${GREEN}=== yay's Dependencies ==="
 echo -e "${RESET}"
