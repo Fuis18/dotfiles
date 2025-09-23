@@ -68,6 +68,9 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh-sudo/sudo.plugin.zsh
 
+# Change color for dir /mnt/
+export LS_COLORS="/mnt/*=32;46:$LS_COLORS"
+
 # Functions
 function mkt(){
 	mkdir {nmap,content,exploits,scripts}

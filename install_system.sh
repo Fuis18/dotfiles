@@ -10,7 +10,6 @@ fi
 USER_NAME="fuis18"
 USER_HOME="/home/${USER_NAME}"
 USER_REPOS="${USER_HOME}/Desktop/repos"
-FUIS_REPO="${USER_REPOS}/fuis18/dotfiles"
 
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
@@ -100,7 +99,29 @@ echo -e "${BLUE}============================================="
 echo -e "${GREEN}==== Intalación de configuración Interna ===="
 echo -e "${BLUE}============================================="
 echo -e "${RESET}"
-pacman -S --noconfirm pulseaudio cava slurp brightnessctl smbclient
+pacman -S --noconfirm pulseaudio cava slurp brightnessctl smbclient wl-clipboard
+
+echo ""
+echo -e "${GREEN}=== Instalando el Editor ==="
+echo -e "${RESET}"
+pacman -S --noconfirm vim neovim
+
+echo ""
+echo -e "${BLUE}=========================="
+echo -e "${GREEN}==== Logo Arch Linux ===="
+echo -e "${BLUE}"
+echo -e "         ."
+echo -e "        / \\"
+echo -e "       /   \\"
+echo -e "      /\    \\"
+echo -e "     /  \    \\"
+echo -e "    /         \\"
+echo -e "   /    .-.    \\"
+echo -e "  /    |   |   _\\"
+echo -e " /   _.'   '._   \\"
+echo -e "/_.-'         '-._\\"
+echo -e "${RESET}"
+pacman -S --noconfirm fastfetch
 
 echo ""
 echo -e "${BLUE}=============================="

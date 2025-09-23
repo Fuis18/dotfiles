@@ -82,7 +82,7 @@
 		"format": "{}"
 	},
 	"hyprland/window": {
-		"format": "<span>  </span>{}",
+		"format": "<span>  </span> {}",
 		"separate-outputs": true,
 		"max-length": 1000
 	},

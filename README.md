@@ -81,7 +81,10 @@ station wlan0 connect "Your_wifi"
 ### Other
 
 Editar imagenes:
-• Gimp
-• Inkscape
+
+- Gimp
+- Inkscape
+
 Redes:
-• Discord
+
+- Discord

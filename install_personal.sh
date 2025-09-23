@@ -27,36 +27,21 @@ echo -e "${GREEN}==== Actualizando el sistema ===="
 echo -e "${RESET}"
 pacman -Syu --noconfirm
 
-
-echo ""
-echo -e "${GREEN}=== Instalando el Editor ==="
-echo -e "${RESET}"
-pacman -S --noconfirm vim neovim
-
 echo ""
 echo -e "${BLUE}======================================"
 echo -e "${GREEN}==== Herramientas de Programación ===="
 echo -e "${BLUE}======================================"
 echo -e "${RESET}"
 pacman -S --noconfirm docker docker-compose nodejs npm
-sudo usermod -aG docker $USER
+
+sudo usermod -aG docker $USER_NAME
 
 echo ""
-echo -e "${BLUE}=========================="
-echo -e "${GREEN}==== Logo Arch Linux ===="
-echo -e "${BLUE}"
-echo -e "         ."
-echo -e "        / \\"
-echo -e "       /   \\"
-echo -e "      /\    \\"
-echo -e "     /  \    \\"
-echo -e "    /         \\"
-echo -e "   /    .-.    \\"
-echo -e "  /    |   |   _\\"
-echo -e " /   _.'   '._   \\"
-echo -e "/_.-'         '-._\\"
+echo -e "${BLUE}====================================="
+echo -e "${GREEN}==== Herramientas de MULTIMEDIA ===="
+echo -e "${BLUE}====================================="
 echo -e "${RESET}"
-pacman -S --noconfirm fastfetch
+pacman -S --noconfirm gimp inkscape vlc blender
 
 echo ""
 echo -e "${GREEN}=== paru's Dependencies ==="
@@ -67,12 +52,12 @@ sudo -u fuis18 bash -c 'paru -S ueberzugpp scrub cmatrix-git'
 echo ""
 echo -e "${GREEN}=== yay's Dependencies ==="
 echo -e "${RESET}"
-sudo -u fuis18 bash -c 'yay -S librewolf-bin'
+sudo -u fuis18 bash -c 'yay -S librewolf-bin onlyoffice-bin'
 
 echo ""
 echo -e "${GREEN}==== Other Pluggins ===="
 echo -e "${RESET}"
-pacman -S --noconfirm discord gimp inkscape
+pacman -S --noconfirm discord
 
 echo ""
 echo -e "${BLUE}===================================="
@@ -99,13 +84,11 @@ echo -e "${GREEN}==== Agreegando Red ===="
 echo -e "${BLUE}========================"
 echo -e "${RESET}"
 
-sudo pacman -S cifs-utils
+pacman -S cifs-utils
 smbclient -L //192.168.0.3 -U 'DESKTOP-EE2OA6G\usuario'
-sudo mkdir -p /mnt/web
+mkdir -p /mnt/web
 
 echo "//192.168.0.3/Web /mnt/web cifs username=usuario,password=luis18,domain=DESKTOP-EE2OA6G,vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0" >> /etc/fstab
-
-sudo mount -a
 
 echo ""
 echo -e "${BLUE}=================================="
