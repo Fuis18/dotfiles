@@ -36,7 +36,12 @@ pacman -S --noconfirm base-devel curl wget unzip xdg-desktop-portal
 echo ""
 echo -e "${GREEN}=== Instalando el terminal y shell ==="
 echo -e "${RESET}"
-pacman -S --noconfirm kitty zsh starship zsh-syntax-highlighting zsh-autosuggestions locate man-db man-pages-es
+pacman -S --noconfirm kitty zsh starship zsh-syntax-highlighting zsh-autosuggestions
+
+echo ""
+echo -e "${GREEN}=== Instalando el documentador ==="
+echo -e "${RESET}"
+pacman -S --noconfirm locate man-db man-pages-es
 
 echo ""
 echo -e "${GREEN}=== Configurando el terminal ==="
@@ -81,9 +86,9 @@ echo -e "${RESET}"
 pacman -S --noconfirm waybar swaync libnotify
 
 echo ""
-echo -e "${BLUE}============================================"
-echo -e "${GREEN}==== Lectores de Configuración de redes ===="
-echo -e "${BLUE}============================================"
+echo -e "${BLUE}================================"
+echo -e "${GREEN}==== Configuración de redes ===="
+echo -e "${BLUE}================================"
 echo -e "${RESET}"
 
 pacman -S --noconfirm bluez bluez-utils networkmanager wpa_supplicant
@@ -99,7 +104,22 @@ echo -e "${BLUE}============================================="
 echo -e "${GREEN}==== Intalación de configuración Interna ===="
 echo -e "${BLUE}============================================="
 echo -e "${RESET}"
-pacman -S --noconfirm pulseaudio cava slurp brightnessctl smbclient wl-clipboard
+pacman -S --noconfirm brightnessctl smbclient wl-clipboard btop thunar
+
+echo ""
+echo -e "${BLUE}================"
+echo -e "${GREEN}==== Multimedia ===="
+echo -e "${BLUE}================"
+echo -e "${RESET}"
+pacman -S --noconfirm pulseaudio cava mpd mpv ncmpcpp
+
+
+echo ""
+echo -e "${BLUE}============================="
+echo -e "${GREEN}==== Captura de Pantalla ===="
+echo -e "${BLUE}============================="
+echo -e "${RESET}"
+pacman -S --noconfirm grim slurp swappy
 
 echo ""
 echo -e "${GREEN}=== Instalando el Editor ==="
@@ -157,7 +177,7 @@ fi
 echo ""
 echo -e "${GREEN}=== paru's Dependencies ==="
 echo -e "${RESET}"
-sudo -u fuis18 bash -c 'paru -S lf wlogout yofi-bin'
+sudo -u fuis18 bash -c 'paru -S wlogout yofi-bin'
 
 echo ""
 echo -e "${GREEN}=== yay's Dependencies ==="

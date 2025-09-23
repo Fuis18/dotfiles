@@ -1,5 +1,8 @@
 # Fix the Java Problem
 export _JAVA_AWT_WM_NONREPARENTING=1
+# Install Bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Enable history
 setopt histignorealldups sharehistory
@@ -59,7 +62,7 @@ alias icat='kitty +kitten icat'
 # alias for wifi
 alias wifi="kitty nmtui"
 # alias for searching and installing packages
-alias pacs="pacman -Slq | fzf -m --preview 'cat <(pacman -Si {1}) <(pacman -Fl {1} | awk \"{print \$2}\")' | xargs -ro sudo pacman -S"
+alias pacs="pacman -Slq | fzf -m --preview 'pacman -Si {} ; pacman -Fl {} | awk \"{print \\$2}\"' | xargs -ro sudo pacman -S"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -74,6 +77,17 @@ export LS_COLORS="/mnt/*=32;46:$LS_COLORS"
 # Functions
 function mkt(){
 	mkdir {nmap,content,exploits,scripts}
+}
+
+# fzf improvement
+function fzfh() {
+    fzf -m --reverse --preview-window down:20 --preview '[[ $(file --mime {}) =~ binary ]] &&
+			echo {} is a binary file ||
+			(bat --style=numbers --color=always {} ||
+				highlight -O ansi -l {} ||
+				coderay {} ||
+				rougify {} ||
+				cat {}) 2> /dev/null | head -500'
 }
 
 # Extract nmap information
@@ -91,7 +105,9 @@ function extractPorts(){
 # man is a package that provides the manual pages for commands
 # Set 'man' colors
 function man() {
-    env \
+    # Forzar español solo para man
+    LANG=es_ES.UTF-8 \
+    LC_MESSAGES=es_ES.UTF-8 \
     LESS_TERMCAP_mb=$'\e[01;31m' \
     LESS_TERMCAP_md=$'\e[01;31m' \
     LESS_TERMCAP_me=$'\e[0m' \
@@ -99,30 +115,7 @@ function man() {
     LESS_TERMCAP_so=$'\e[01;44;30m' \
     LESS_TERMCAP_ue=$'\e[0m' \
     LESS_TERMCAP_us=$'\e[01;32m' \
-    man "$@"
-}
-
-# fzf improvement
-function fzf(){
-
-	if [ "$1" = "h" ]; then
-		fzf -m --reverse --preview-window down:20 --preview '[[ $(file --mime {}) =~ binary ]] &&
- 	                echo {} is a binary file ||
-	                 (bat --style=numbers --color=always {} ||
-	                  highlight -O ansi -l {} ||
-	                  coderay {} ||
-	                  rougify {} ||
-	                  cat {}) 2> /dev/null | head -500'
-
-	else
-	        fzf -m --preview '[[ $(file --mime {}) =~ binary ]] &&
-	                         echo {} is a binary file ||
-	                         (bat --style=numbers --color=always {} ||
-	                          highlight -O ansi -l {} ||
-	                          coderay {} ||
-	                          rougify {} ||
-	                          cat {}) 2> /dev/null | head -500'
-	fi
+    command man "$@"
 }
 
 function rmk(){

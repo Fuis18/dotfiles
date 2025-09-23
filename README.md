@@ -47,7 +47,7 @@ station wlan0 connect "Your_wifi"
 | Autocomplete        | zsh-autosuggestions     |
 | Editor              | neovim                  |
 | Editor plugin       | ncvim                   |
-| File Manager        | lf                      |
+| File Manager        | thunar                  |
 | Launcher            | yofi                    |
 | Status bar          | waybar -> ironbar       |
 | Widgets             | eww-wayland             |
@@ -58,8 +58,9 @@ station wlan0 connect "Your_wifi"
 | Audio               | cava                    |
 | Audio back          | pulseaudio              |
 | Power Options       | wlogout                 |
-| Screenshots         | slurp                   |
+| Screenshot          | grim slurp swappy       |
 | Brillo              | brightnessctl           |
+| System monitor      | htop                    |
 
 ### Adicionales
 
@@ -88,3 +89,8 @@ Editar imagenes:
 Redes:
 
 - Discord
+
+Programación:
+
+- Bun
+- docker

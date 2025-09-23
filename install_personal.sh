@@ -32,7 +32,9 @@ echo -e "${BLUE}======================================"
 echo -e "${GREEN}==== Herramientas de Programación ===="
 echo -e "${BLUE}======================================"
 echo -e "${RESET}"
-pacman -S --noconfirm docker docker-compose nodejs npm
+pacman -S --noconfirm docker docker-compose
+
+curl -fsSL https://bun.sh/install | bash
 
 sudo usermod -aG docker $USER_NAME
 
@@ -41,7 +43,7 @@ echo -e "${BLUE}====================================="
 echo -e "${GREEN}==== Herramientas de MULTIMEDIA ===="
 echo -e "${BLUE}====================================="
 echo -e "${RESET}"
-pacman -S --noconfirm gimp inkscape vlc blender
+pacman -S --noconfirm gimp inkscape blender
 
 echo ""
 echo -e "${GREEN}=== paru's Dependencies ==="
@@ -75,8 +77,9 @@ cd /usr/share/fonts
 unzip "${USER_HOME}/Downloads/FiraCode.zip"
 fc-cache -fv
 
+# ncvim
 git clone https://github.com/NvChad/starter ~/.config/nvim
-# sudo -u "${USER_NAME}" nvim --headless +MasonInstallAll +qall
+sudo -u "${USER_NAME}" nvim --headless +MasonInstallAll +qall
 
 echo ""
 echo -e "${BLUE}========================"
@@ -88,7 +91,9 @@ pacman -S cifs-utils
 smbclient -L //192.168.0.3 -U 'DESKTOP-EE2OA6G\usuario'
 mkdir -p /mnt/web
 
-echo "//192.168.0.3/Web /mnt/web cifs username=usuario,password=luis18,domain=DESKTOP-EE2OA6G,vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0" >> /etc/fstab
+echo "//192.168.0.3/web /mnt/web cifs username=usuario,password=luis18,domain=DESKTOP-EE2OA6G,vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0" >> /etc/fstab
+
+echo "//192.168.0.3/media /mnt/media cifs username=usuario,password=luis18,domain=DESKTOP-EE2OA6G,vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0" >> /etc/fstab
 
 echo ""
 echo -e "${BLUE}=================================="
