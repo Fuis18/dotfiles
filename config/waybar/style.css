@@ -94,18 +94,18 @@ span {
 	background-color: @bg-primary;
 }
 
-#custom-cava {
-	background-color: @bg-secondary;
-}
 /* center */
 #custom-arch,
 #clock,
 #custom-dot-wallpaper {
-	background-color: @bg-primary;
+	background-color: @bg-secondary;
 }
 /* right */
 network {
 	background-color: @bg-transparent;
+}
+#custom-cava {
+	background-color: @bg-primary;
 }
 /* status */
 #pulseaudio,

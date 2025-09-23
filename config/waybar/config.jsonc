@@ -19,9 +19,7 @@
         "hyprland/workspaces",
         "custom/upper-left-secondary",
         "group/performance",
-        "custom/upper-left",
-        "custom/cava",
-        "custom/upper-left-secondary-transparent",
+        "custom/upper-left-transparent",
         "hyprland/window"
     ],
 	"modules-center": [
@@ -34,7 +32,8 @@
 
     "modules-right": [
         "network#speed",
-        "custom/upper-right-secondary-transparent",
+        "custom/upper-right-transparent",
+        "custom/cava",
         "group/status",
         "custom/upper-right",
         "group/system"
