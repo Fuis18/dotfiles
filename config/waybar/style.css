@@ -1,8 +1,8 @@
 @define-color bg-primary #2b305b;
 @define-color bg-secondary #64729d;
 @define-color bg-transparent rgba(0, 0, 0, 0);
-@define-color color-regular #d6def4;
-@define-color color-disabled #606060;
+@define-color color-regular #e3e3f7;
+@define-color color-disabled #c3c3e7;
 
 * {
 	font-family: FiraCore Nerd Font;
@@ -60,7 +60,7 @@ window,
 #network,
 #pulseaudio,
 #pulseaudio#microphone,
-#bluetooth,
+#custom-bluetooth,
 #blacklight,
 #battery,
 #custom-power {
@@ -109,11 +109,11 @@ network {
 }
 /* status */
 #pulseaudio,
-#bluetooth,
+#custom-bluetooth,
 #pulseaudio#microphone {
 	background-color: @bg-secondary;
 }
-#bluetooth.disabled {
+#custom-bluetooth.off {
 	color: @color-disabled;
 }
 /* system */

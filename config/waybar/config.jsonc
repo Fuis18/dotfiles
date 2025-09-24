@@ -23,17 +23,18 @@
         "hyprland/window"
     ],
 	"modules-center": [
-        "custom/upper-right-transparent",
+        "custom/upper-right-secondary-transparent",
         "custom/arch",
         "clock",
         "custom/dot-wallpaper",
-        "custom/upper-left-transparent"
+        "custom/upper-left-secondary-transparent"
     ],
 
     "modules-right": [
         "network#speed",
         "custom/upper-right-transparent",
         "custom/cava",
+        "custom/upper-right-secondary",
         "group/status",
         "custom/upper-right",
         "group/system"

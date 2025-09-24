@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 set -eu -o pipefail
 
 # Ruta del script: $HOME/.config/hypr/scripts/Bluetooth.sh
@@ -53,13 +53,14 @@ cmd_status() {
     c=$(connected_count)
     if [ "$c" -gt 0 ]; then
       # icon + número de conexiones
-      printf " %s" "$c"
+      # printf " %s" "$c"
+      echo "{\"text\":\" %s $c\",\"class\":\"connect\"}"
     else
       # icon sin número (enchufado pero sin conexiones)
-      printf ""
+      echo "{\"text\":\"\",\"class\":\"on\"}"
     fi
   else
-    printf " off"
+    echo "{\"text\":\"\",\"class\":\"off\"}"
   fi
 }
 
