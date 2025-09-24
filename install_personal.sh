@@ -48,13 +48,12 @@ pacman -S --noconfirm gimp inkscape blender
 echo ""
 echo -e "${GREEN}=== paru's Dependencies ==="
 echo -e "${RESET}"
-sudo -u fuis18 bash -c 'paru -S ueberzugpp scrub cmatrix-git'
-
+sudo -u fuis18 bash -c 'paru -S ueberzugpp scrub'
 
 echo ""
 echo -e "${GREEN}=== yay's Dependencies ==="
 echo -e "${RESET}"
-sudo -u fuis18 bash -c 'yay -S librewolf-bin onlyoffice-bin'
+sudo -u fuis18 bash -c 'yay -S librewolf-bin onlyoffice-bin cmatrix-git'
 
 echo ""
 echo -e "${GREEN}==== Other Pluggins ===="
@@ -68,14 +67,6 @@ echo -e "${BLUE}===================================="
 echo -e "${RESET}"
 
 # Wallpapaers
-
-echo "==== Fonts ===="
-mkdir -p "${USER_HOME}/Downloads"
-chown -R "${USER_NAME}:${USER_NAME}" "${USER_HOME}/Downloads"
-wget -O "${USER_HOME}/Downloads/FiraCode.zip" https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip
-cd /usr/share/fonts
-unzip "${USER_HOME}/Downloads/FiraCode.zip"
-fc-cache -fv
 
 # ncvim
 git clone https://github.com/NvChad/starter ~/.config/nvim

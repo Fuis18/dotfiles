@@ -10,6 +10,7 @@ fi
 USER_NAME="fuis18"
 USER_HOME="/home/${USER_NAME}"
 USER_REPOS="${USER_HOME}/Desktop/repos"
+FUIS_REPO="${USER_REPOS}/fuis18/dotfiles"
 
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
@@ -31,7 +32,7 @@ echo -e "${BLUE}=================================="
 echo -e "${GREEN}==== Instalando paquetes base ===="
 echo -e "${BLUE}=================================="
 echo -e "${RESET}"
-pacman -S --noconfirm base-devel curl wget unzip xdg-desktop-portal
+pacman -S --noconfirm base base-devel curl wget unzip xdg-desktop-portal
 
 echo ""
 echo -e "${GREEN}=== Instalando el terminal y shell ==="
@@ -78,7 +79,7 @@ user = "greeter"
 EOF
 
 chmod 644 /etc/greetd/config.toml
-systemctl enable greetd.service
+systemctl enable greetd
 
 echo ""
 echo -e "${GREEN}=== Paquetes de Customización  ==="
@@ -86,18 +87,31 @@ echo -e "${RESET}"
 pacman -S --noconfirm waybar swaync libnotify
 
 echo ""
+echo -e "${BLUE}=================================="
+echo -e "${GREEN}==== Configuración Multimedia ===="
+echo -e "${BLUE}=================================="
+echo -e "${RESET}"
+
+pacman -S --noconfirm pipewire pipewire-pulse pipewire-alsa
+
+systemctl --user enable pipewire pipewire-pulse wireplumber
+
+
+echo ""
 echo -e "${BLUE}================================"
-echo -e "${GREEN}==== Configuración de redes ===="
+echo -e "${GREEN}==== Configuración de Redes ===="
 echo -e "${BLUE}================================"
 echo -e "${RESET}"
 
-pacman -S --noconfirm bluez bluez-utils networkmanager wpa_supplicant
-systemctl enable bluetooth.service
-systemctl start bluetooth.service
-systemctl enable NetworkManager.service
-systemctl start NetworkManager.service
-sudo systemctl enable wpa_supplicant.service
-sudo systemctl start wpa_supplicant.service
+systemctl enable NetworkManager
+systemctl start NetworkManager
+
+pacman -S --noconfirm wpa_supplicant bluez bluez-utils
+
+systemctl enable bluetooth
+systemctl start bluetooth
+sudo systemctl enable wpa_supplicant
+sudo systemctl start wpa_supplicant
 
 echo ""
 echo -e "${BLUE}============================================="
@@ -107,11 +121,11 @@ echo -e "${RESET}"
 pacman -S --noconfirm brightnessctl smbclient wl-clipboard btop thunar
 
 echo ""
-echo -e "${BLUE}================"
+echo -e "${BLUE}==================="
 echo -e "${GREEN}==== Multimedia ===="
-echo -e "${BLUE}================"
+echo -e "${BLUE}===================="
 echo -e "${RESET}"
-pacman -S --noconfirm pulseaudio cava mpd mpv ncmpcpp
+pacman -S --noconfirm cava mpd mpv ncmpcpp
 
 
 echo ""
@@ -210,6 +224,13 @@ cp -r "${FUIS_REPO}/root/config/." /root/.config/
 cp -r "${FUIS_REPO}/root/zshrc" /root/
 mv /root/zshrc /root/.zshrc
 
+echo "==== Fonts ===="
+mkdir -p "${USER_HOME}/Downloads"
+chown -R "${USER_NAME}:${USER_NAME}" "${USER_HOME}/Downloads"
+wget -O "${USER_HOME}/Downloads/FiraCode.zip" https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip
+cd /usr/share/fonts
+unzip "${USER_HOME}/Downloads/FiraCode.zip"
+fc-cache -fv
 
 echo ""
 echo -e "${GREEN}=== Actualizando el Shell ==="
