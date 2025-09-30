@@ -80,11 +80,20 @@ echo -e "${RESET}"
 
 pacman -S cifs-utils
 smbclient -L //192.168.0.3 -U 'DESKTOP-EE2OA6G\usuario'
+
 mkdir -p /mnt/web
+mkdir -p /mnt/media
+mkdir -p /mnt/linux
+mkdir -p /mnt/Music
+mkdir -p /mnt/Private
+mkdir -p /mnt/organizer
 
 echo "//192.168.0.3/web /mnt/web cifs username=usuario,password=luis18,domain=DESKTOP-EE2OA6G,vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0" >> /etc/fstab
-
 echo "//192.168.0.3/media /mnt/media cifs username=usuario,password=luis18,domain=DESKTOP-EE2OA6G,vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0" >> /etc/fstab
+echo "//192.168.0.3/linux /mnt/linux cifs username=usuario,password=luis18,domain=DESKTOP-EE2OA6G,vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0" >> /etc/fstab
+echo "//192.168.0.3/Music /mnt/music cifs username=usuario,password=luis18,domain=DESKTOP-EE2OA6G,vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0" >> /etc/fstab
+echo "//192.168.0.3/Private /mnt/Private cifs username=usuario,password=luis18,domain=DESKTOP-EE2OA6G,vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0" >> /etc/fstab
+echo "//192.168.0.3/organizer /mnt/organizer cifs username=usuario,password=luis18,domain=DESKTOP-EE2OA6G,vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0" >> /etc/fstab
 
 echo ""
 echo -e "${BLUE}=================================="
