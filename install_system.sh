@@ -126,6 +126,10 @@ echo -e "${BLUE}===================="
 echo -e "${RESET}"
 pacman -S --noconfirm cava mpd mpv ncmpcpp mpc
 
+mkdir -p ~/.config/mpd/playlists
+
+systemctl --user enable --now mpd.service
+
 echo ""
 echo -e "${BLUE}============================="
 echo -e "${GREEN}==== Captura de Pantalla ===="
@@ -245,8 +249,6 @@ usermod --shell "$ZSH_PATH" "$USER_NAME"
 
 echo "%wheel ALL=(ALL) ALL" > /etc/sudoers.d/wheel
 chmod 440 /etc/sudoers.d/wheel
-
-mkdir -p ~/.config/mpd/playlists
 
 echo ""
 echo -e "${BLUE}=================================="
