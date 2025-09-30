@@ -140,6 +140,6 @@ mouse_support = yes
 
 locked_screen_width_part = 50
 ask_for_locked_screen_width_part = no
-startup_screen = playlist 
+startup_screen = browser 
 startup_slave_screen = visualizer
 startup_slave_screen_focus = no
