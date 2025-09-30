@@ -62,7 +62,8 @@ alias icat='kitty +kitten icat'
 # alias for wifi
 alias wifi="kitty nmtui"
 # alias for searching and installing packages
-alias pacs="pacman -Slq | fzf -m --preview 'pacman -Si {} ; pacman -Fl {} | awk \"{print \\$2}\"' | xargs -ro sudo pacman -S"
+# alias pacs="pacman -Slq | fzfh -m --preview 'pacman -Si {} ; pacman -Fl {} | awk \"{print \\$2}\"' | xargs -ro sudo pacman -S"
+alias nvim-root='sudo -E nvim'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -79,15 +80,20 @@ function mkt(){
 	mkdir {nmap,content,exploits,scripts}
 }
 
+# See pacs installed
+function pacs() {
+  pacman -Slq | fzfh --preview "pacman -Si {} ; pacman -Fl {} | awk '{print \$2}'" | xargs -ro sudo pacman -S
+}
+
 # fzf improvement
 function fzfh() {
-    fzf -m --reverse --preview-window down:20 --preview '[[ $(file --mime {}) =~ binary ]] &&
-			echo {} is a binary file ||
-			(bat --style=numbers --color=always {} ||
-				highlight -O ansi -l {} ||
-				coderay {} ||
-				rougify {} ||
-				cat {}) 2> /dev/null | head -500'
+  fzf --reverse --preview-window down:20 --preview '[[ $(file --mime {}) =~ binary ]] &&
+      echo {} is a binary file ||
+      (bat --style=numbers --color=always {} ||
+      highlight -O ansi -l {} ||
+      coderay {} ||
+      rougify {} ||
+      cat {}) 2> /dev/null | head -500'
 }
 
 # Extract nmap information
