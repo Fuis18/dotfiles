@@ -124,7 +124,7 @@ echo -e "${BLUE}==================="
 echo -e "${GREEN}==== Multimedia ===="
 echo -e "${BLUE}===================="
 echo -e "${RESET}"
-pacman -S --noconfirm cava mpd mpv ncmpcpp
+pacman -S --noconfirm cava mpd mpv ncmpcpp mpc
 
 echo ""
 echo -e "${BLUE}============================="
