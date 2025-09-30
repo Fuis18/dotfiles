@@ -96,7 +96,6 @@ pacman -S --noconfirm pipewire pipewire-pulse pipewire-alsa
 
 systemctl --user enable pipewire pipewire-pulse wireplumber
 
-
 echo ""
 echo -e "${BLUE}================================"
 echo -e "${GREEN}==== Configuración de Redes ===="
@@ -126,7 +125,6 @@ echo -e "${GREEN}==== Multimedia ===="
 echo -e "${BLUE}===================="
 echo -e "${RESET}"
 pacman -S --noconfirm cava mpd mpv ncmpcpp
-
 
 echo ""
 echo -e "${BLUE}============================="
@@ -230,6 +228,9 @@ chown -R "${USER_NAME}:${USER_NAME}" "${USER_HOME}/Downloads"
 wget -O "${USER_HOME}/Downloads/FiraCode.zip" https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip
 cd /usr/share/fonts
 unzip "${USER_HOME}/Downloads/FiraCode.zip"
+
+pacman -S --noconfirm noto-fonts-cjk
+
 fc-cache -fv
 
 echo ""
