@@ -246,6 +246,8 @@ usermod --shell "$ZSH_PATH" "$USER_NAME"
 echo "%wheel ALL=(ALL) ALL" > /etc/sudoers.d/wheel
 chmod 440 /etc/sudoers.d/wheel
 
+mkdir -p ~/.config/mpd/playlists
+
 echo ""
 echo -e "${BLUE}=================================="
 echo -e "${GREEN}============= READY! ============="
