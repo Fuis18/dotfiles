@@ -1,0 +1,7 @@
+[terminal]
+vt = 1
+
+[default_session]
+command = "tuigreet --time --cmd hyprland --theme 'border=violet;text=cyan;prompt=green;time=cyan;action=green;container=black;input=red' --window-padding 5 --greeting '\n Arch Linux - Login to Hacker \n' --asterisks"
+
+user = "greeter"

@@ -106,7 +106,11 @@ efibootmgr -v
 # Boot0004* GRUB HD(1,GPT,...)/File(\EFI\GRUB\grubx64.efi)
 
 efibootmgr -o 0004
+```
 
+### id
+
+```sh
 passwd
 admin18 # root password
 useradd -m -G wheel fuis18

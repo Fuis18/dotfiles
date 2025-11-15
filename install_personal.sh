@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Manejo de errores
 set -euo pipefail
 
 if [[ $EUID -ne 0 ]]; then
@@ -9,91 +10,51 @@ fi
 
 USER_NAME="fuis18"
 USER_HOME="/home/${USER_NAME}"
-USER_REPOS="${USER_HOME}/Desktop/repos"
-FUIS_REPO="${USER_REPOS}/fuis18/dotfiles"
 
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 RESET='\033[0m'
 
 echo ""
-echo -e "${BLUE}=============================="
-echo -e "${GREEN}==== Instalacion Personal ===="
-echo -e "${BLUE}=============================="
-echo ""
-
-echo ""
-echo -e "${GREEN}==== Actualizando el sistema ===="
+echo -e "${BLUE} =================================="
+echo -e "${GREEN}====== Updating the System ======="
+echo -e "${BLUE} =================================="
 echo -e "${RESET}"
+
 pacman -Syu --noconfirm
 
 echo ""
-echo -e "${BLUE}======================================"
-echo -e "${GREEN}==== Herramientas de Programación ===="
-echo -e "${BLUE}======================================"
-echo -e "${RESET}"
-pacman -S --noconfirm docker docker-compose
+echo -e "${BLUE} =================================="
+echo -e "${GREEN}========== Applications =========="
+echo -e "${BLUE} =================================="
+echo ""
 
-curl -fsSL https://bun.sh/install | bash
+# programación
+pacman -S --noconfirm docker docker-compose nodejs npm
 
 sudo usermod -aG docker $USER_NAME
 
-echo ""
-echo -e "${BLUE}====================================="
-echo -e "${GREEN}==== Herramientas de MULTIMEDIA ===="
-echo -e "${BLUE}====================================="
-echo -e "${RESET}"
+# multimedia
 pacman -S --noconfirm gimp inkscape blender
 
-echo ""
-echo -e "${GREEN}=== paru's Dependencies ==="
-echo -e "${RESET}"
-sudo -u fuis18 bash -c 'paru -S ueberzugpp scrub'
+# browsers
+sudo -u fuis18 bash -c 'yay -S librewolf-bin brave-bin'
 
-echo ""
-echo -e "${GREEN}=== yay's Dependencies ==="
-echo -e "${RESET}"
-sudo -u fuis18 bash -c 'yay -S librewolf-bin onlyoffice-bin cmatrix-git'
+sudo pacman -S libreoffice-still
+sudo -u fuis18 bash -c 'yay -S onlyoffice-bin'
+sudo -u fuis18 bash -c 'yay -S obsidian'
 
-echo ""
-echo -e "${GREEN}==== Other Pluggins ===="
-echo -e "${RESET}"
+sudo -u fuis18 bash -c 'yay -S cmatrix-git'
+
 pacman -S --noconfirm discord
 
-echo ""
-echo -e "${BLUE}===================================="
-echo -e "${GREEN}==== Agreegando Customizaciones ===="
-echo -e "${BLUE}===================================="
-echo -e "${RESET}"
+sudo pacman -S --noconfirm syncthing
+sudo pacman -S --noconfirm rclone
 
-# Wallpapaers
+systemctl --user enable --now syncthing.service
 
-# ncvim
-git clone https://github.com/NvChad/starter ~/.config/nvim
-sudo -u "${USER_NAME}" nvim --headless +MasonInstallAll +qall
-
-echo ""
-echo -e "${BLUE}========================"
-echo -e "${GREEN}==== Agreegando Red ===="
-echo -e "${BLUE}========================"
-echo -e "${RESET}"
-
-pacman -S cifs-utils
-smbclient -L //192.168.0.3 -U 'DESKTOP-EE2OA6G\usuario'
-
-mkdir -p /mnt/web
-mkdir -p /mnt/media
-mkdir -p /mnt/linux
-mkdir -p /mnt/Music
-mkdir -p /mnt/Private
-mkdir -p /mnt/organizer
-
-echo "//192.168.0.3/web /mnt/web cifs username=usuario,password=luis18,domain=DESKTOP-EE2OA6G,vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0" >> /etc/fstab
-echo "//192.168.0.3/media /mnt/media cifs username=usuario,password=luis18,domain=DESKTOP-EE2OA6G,vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0" >> /etc/fstab
-echo "//192.168.0.3/linux /mnt/linux cifs username=usuario,password=luis18,domain=DESKTOP-EE2OA6G,vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0" >> /etc/fstab
-echo "//192.168.0.3/Music /mnt/music cifs username=usuario,password=luis18,domain=DESKTOP-EE2OA6G,vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0" >> /etc/fstab
-echo "//192.168.0.3/Private /mnt/Private cifs username=usuario,password=luis18,domain=DESKTOP-EE2OA6G,vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0" >> /etc/fstab
-echo "//192.168.0.3/organizer /mnt/organizer cifs username=usuario,password=luis18,domain=DESKTOP-EE2OA6G,vers=3.0,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0" >> /etc/fstab
+# agregar música
+# wallpapaers
 
 echo ""
 echo -e "${BLUE}=================================="
