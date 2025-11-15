@@ -1,0 +1,85 @@
+@define-color bg-primary #2b305b;
+@define-color bg-secondary #64729d;
+@define-color bg-transparent rgba(0, 0, 0, 0);
+@define-color color-regular #e3e3f7;
+@define-color color-disabled #c3c3e7;
+
+* {
+	font-family: FiraCore Nerd Font;
+	color: @color-regular;
+	font-size: 16px;
+}
+
+#upper-left,
+#upper-right,
+#upper-left-secondary,
+#upper-right-secondary {
+	background-color: @bg-secondary;
+	color: @bg-primary;
+	font-size: 24px;
+}
+
+#upper-left-secondary,
+#upper-right-secondary {
+	background-color: @bg-primary;
+	color: @bg-secondary;
+}
+
+#upper-left-transparent,
+#upper-right-transparent,
+#upper-left-secondary-transparent,
+#upper-right-secondary-transparent {
+	background-color: @bg-transparent;
+	font-size: 24px;
+}
+
+#arch,
+#clock,
+#dot-wallpaper {
+	background-color: @bg-secondary;
+	padding: 0 10px;
+}
+
+#appmenu,
+#cpu,
+#temperature,
+#network,
+#cava,
+#backlight,
+#battery,
+#power {
+	padding: 0 10px;
+}
+
+/* Workspaces */
+#workspaces {
+	background-color: @bg-secondary;
+}
+
+#workspaces button.active {
+	color: @color-regular;
+}
+
+/* Performance */
+#cpu,
+#temperature {
+	background-color: @bg-primary;
+}
+
+/* Status */
+#pulseaudio,
+#bluetooth,
+#microphone {
+	background-color: @bg-secondary;
+}
+
+#bluetooth.off {
+	color: @color-disabled;
+}
+
+/* System */
+#backlight,
+#battery,
+#power {
+	background-color: @bg-primary;
+}
