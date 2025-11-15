@@ -73,7 +73,7 @@ echo -e "${GREEN}======== Essential tools ========"
 echo -e "${BLUE} ================================="
 echo -e "${RESET}"
 
-pacman -S --noconfirm yazi
+pacman -S --noconfirm yazi lf
 pacman -S --noconfirm brightnessctl wl-clipboard btop swaync libnotify
 pacman -S --noconfirm curl unzip wget
 
