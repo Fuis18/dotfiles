@@ -126,3 +126,5 @@ function rmk(){
 # ---------------P R O M P T------------------
 # Init Starship
 eval "$(starship init zsh)"
+
+export MANLANG=es

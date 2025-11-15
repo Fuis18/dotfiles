@@ -36,10 +36,12 @@ sudo usermod -aG docker $USER_NAME
 
 # multimedia
 pacman -S --noconfirm gimp inkscape blender
+pacman -S --noconfirm obs-studio kdenlive
 
 # browsers
 sudo -u fuis18 bash -c 'yay -S librewolf-bin brave-bin'
 
+# ofimatica
 sudo pacman -S libreoffice-still
 sudo -u fuis18 bash -c 'yay -S onlyoffice-bin'
 sudo -u fuis18 bash -c 'yay -S obsidian'
