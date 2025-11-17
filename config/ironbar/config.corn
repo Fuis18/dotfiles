@@ -63,6 +63,7 @@ let {
   // right
   $network = {
     type = "sys_info"
+    class = "network"
 
     interval.networks = 3
 
