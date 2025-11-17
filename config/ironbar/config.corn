@@ -1,0 +1,124 @@
+let {
+// https://github.com/JakeStanger/ironbar/blob/master/examples/desktop/style.css
+// https://github.com/JakeStanger/ironbar/wiki/styling-guide
+// https://github.com/JakeStanger/ironbar/wiki/launcher
+// https://github.com/bluebyt/Wayfire-dots/blob/main/.config/ironbar/config.corn
+
+  // left
+
+  $launcher = {
+    type = "custom"
+    class = "launcher-yofi"
+    command = "echo 'APPS'"
+    interval = 0
+    tooltip = "launcher"
+    on_click = "yofi"
+  }
+
+  $workspaces = {
+      type = "workspaces"
+      active_only = false
+      all_outputs = true
+
+      // mapping de íconos
+      icons = {
+          "1" = ""
+          "2" = ""
+          "3" = ""
+          empty = ""
+          default = ""
+      }
+      persistent = 3
+
+      // acciones
+      on_click = "activate"
+      on_scroll_up = "hyprctl dispatch workspace -1"
+      on_scroll_down = "hyprctl dispatch workspace +1"
+  }
+
+  $performance = {
+      type = "sys_info"
+      class = "performance"
+
+      interval.memory = 30
+      interval.cpu = 2
+      interval.temps = 5
+      interval.disks = 300
+
+      format = [
+        " {cpu_percent}% | {cpu_frequency} GHz | {temp_c@CPUTIN}°C"
+        " {memory_used} / {memory_total} GB ({memory_available} | {memory_percent2}%) | {swap_used} / {swap_total} GB ({swap_free} | {swap_percent}%)"
+        "󰋊 {disk_used#T@/:.1} / {disk_total#T@/:.1} TB ({disk_percent@/}%) | {disk_read} / {disk_write} MB/s"
+        "󰥔 {uptime}"
+      ]
+  }
+
+  // center
+
+  $oclock = {
+    type = "clock"
+    format = "%d/%m/%Y %H:%M"
+  }
+
+  // right
+  $network = {
+    type = "sys_info"
+
+    interval.networks = 3
+
+    format = [
+      "󰓢 {net_down@enp39s0} / {net_up@enp39s0} Mbps"
+    ]
+  }
+
+  $cava = {
+    transition_type = "slide_end"
+    transition_duration = 750
+    name = "cava"
+    type = "script"
+    mode = "watch"
+    cmd = "!~/.config/hypr/scripts/cava.sh"
+  }
+
+  $volume = {
+    type = "volume"
+    format = "{icon} {percentage}%"
+    max_volume = 100
+    truncate = "end"
+    icons.volume_high = "󰕾"
+    icons.volume_medium = "󰖀"
+    icons.volume_low = "󰕿"
+    icons.muted = "󰝟"
+  }
+
+
+  $battery = {
+    type = "battery"
+    format = "{percentage}%"
+    thresholds.warning = 20
+    thresholds.critical = 5
+  }
+
+  $wlogout = {
+    type = "custom"
+    bar = [
+      {
+        type = "button"
+        name = "wlogout"
+        class = "wlogout"
+        label = ""
+        on_click = "!~/.config/hypr/scripts/wlogout.sh",
+        on-click-right: "!~/.config/hypr/scripts/changeBlur"
+      }
+    ]
+  }
+
+}
+
+in {
+  position = "bottom"
+  height = 32
+  start = [$launcher, $workspace, $performance]
+  center = [$oclock]
+  end = [$network, $cava, $volume, $wlogout]
+}
