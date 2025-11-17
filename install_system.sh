@@ -102,16 +102,16 @@ pacman -S --noconfirm grim slurp swappy
 echo ""
 echo -e "${BLUE} ================================="
 echo -e "${GREEN} ======== Logo Arch Linux ========"
-echo -e "${BLUE}                .         "
-echo -e "                      / \\       "
-echo -e "                     /   \\      "
-echo -e "                    /\    \\     "
-echo -e "                   /  \    \\    "
-echo -e "                  /         \\   "
-echo -e "                 /    .-.    \\  "
-echo -e "                /    |   |   _\\ "
-echo -e "               /   _.'   '._   \\"
-echo -e "              /_.-'         '-._\\"
+echo -e "${BLUE}         .         "
+echo -e "               / \\       "
+echo -e "              /   \\      "
+echo -e "             /\    \\     "
+echo -e "            /  \    \\    "
+echo -e "           /         \\   "
+echo -e "          /    .-.    \\  "
+echo -e "         /    |   |   _\\ "
+echo -e "        /   _.'   '._   \\"
+echo -e "       /_.-'         '-._\\"
 echo -e "${RESET}"
 
 pacman -S --noconfirm fastfetch
@@ -148,24 +148,24 @@ chmod 644 /etc/greetd/config.toml
 systemctl enable greetd
 
 echo ""
-echo -e "${BLUE} ================================"
-echo -e "${GREEN} ===== Instalando el Editor ====="
-echo -e "${BLUE} ================================"
+echo -e "${BLUE} =================================="
+echo -e "${GREEN} ====== Instalando el Editor ======"
+echo -e "${BLUE} =================================="
 echo -e "${RESET}"
 
 pacman -S --noconfirm vim neovim
 
 echo ""
-echo -e "${BLUE} =============================="
-echo -e "${GREEN} ========= AUR Helper ========="
-echo -e "${BLUE} =============================="
+echo -e "${BLUE} =================================="
+echo -e "${GREEN} =========== AUR Helper ==========="
+echo -e "${BLUE} =================================="
 echo -e "${RESET}"
 echo ""
 
 echo ""
-echo -e "${BLUE} ============================="
-echo -e "${GREEN} ======== Aur => paru ========"
-echo -e "${BLUE} ============================="
+echo -e "${BLUE} ================================="
+echo -e "${GREEN} ========== Aur => paru =========="
+echo -e "${BLUE} ================================="
 echo -e "${RESET}"
 
 PARU_DIR="${USER_REPOS}/paru-bin"
@@ -178,9 +178,9 @@ if [[ -d "$PARU_DIR" ]]; then
 fi
 
 echo ""
-echo -e "${BLUE} =============================="
-echo -e "${GREEN} ========= Aur => yay ========="
-echo -e "${BLUE} =============================="
+echo -e "${BLUE} =================================="
+echo -e "${GREEN} =========== Aur => yay ==========="
+echo -e "${BLUE} =================================="
 echo -e "${RESET}"
 
 YAY_DIR="${USER_REPOS}/yay"
@@ -193,25 +193,25 @@ if [[ -d "$YAY_DIR" ]]; then
 fi
 
 echo ""
-echo -e "${BLUE} =============================="
-echo -e "${GREEN}=== paru's Dependencies ==="
-echo -e "${BLUE} =============================="
+echo -e "${BLUE} ================================="
+echo -e "${GREEN} ====== paru's Dependencies ======"
+echo -e "${BLUE} ================================="
 echo -e "${RESET}"
 
 sudo -u fuis18 bash -c 'paru -S wlogout yofi-bin ironbar-bin scrub bluetui'
 
 echo ""
-echo -e "${BLUE} =============================="
-echo -e "${GREEN}=== yay's Dependencies ==="
-echo -e "${BLUE} =============================="
+echo -e "${BLUE} =================================="
+echo -e "${GREEN} ======= yay's Dependencies ======="
+echo -e "${BLUE} =================================="
 echo -e "${RESET}"
 
 sudo -u fuis18 bash -c 'yay -S swayimg'
 
 echo ""
-echo -e "${BLUE} =============================="
-echo -e "${GREEN}==== Copiying Root Files ===="
-echo -e "${BLUE} =============================="
+echo -e "${BLUE} ================================="
+echo -e "${GREEN} ====== Copiying Root Files ======"
+echo -e "${BLUE} ================================="
 echo -e "${RESET}"
 
 cp -r "${FUIS_REPO}/root/config/." /root/.config/
@@ -221,9 +221,9 @@ cp -r "${FUIS_REPO}/root/zshrc" /root/
 mv /root/zshrc /root/.zshrc
 
 echo ""
-echo -e "${BLUE} =============================="
-echo -e "${GREEN}==== Copiying My Files ===="
-echo -e "${BLUE} =============================="
+echo -e "${BLUE} ================================="
+echo -e "${GREEN} ======= Copiying My Files ======="
+echo -e "${BLUE} ================================="
 echo -e "${RESET}"
 
 cp -r "${FUIS_REPO}/config/." "${USER_HOME}/.config/"
@@ -248,9 +248,9 @@ unzip "${USER_HOME}/Downloads/FiraCode.zip" -d /usr/share/fonts
 fc-cache -fv
 
 echo ""
-echo -e "${BLUE} ============================="
-echo -e "${GREEN} === Actualizando el Shell ==="
-echo -e "${BLUE} ============================="
+echo -e "${BLUE} ================================="
+echo -e "${GREEN} ===== Actualizando el Shell ====="
+echo -e "${BLUE} ================================="
 echo -e "${RESET}"
 
 ZSH_PATH="$(command -v zsh || true)"
