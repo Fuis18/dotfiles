@@ -58,10 +58,16 @@ mkdir -p /mnt/home
 mount /dev/sda3 /mnt/home
 
 lsblk -f
+```
 
-# Swap
-cd /mnt/home
+### Swap
+
+```sh
+cd /mnt
+
+# Crear el archivo con 10G
 fallocate -l 10G swapfile
+
 chmod 600 swapfile
 mkswap swapfile
 swapon swapfile
@@ -69,7 +75,15 @@ swapon swapfile
 swapon --show
 
 nano /etc/fstab
-/home/swapfile none swap defaults 0 0
+```
+
+```sh
+/swapfile none swap defaults 0 0
+```
+
+### chroot
+
+```sh
 cd /
 
 pacstrap /mnt base linux linux-firmware
@@ -78,8 +92,6 @@ genfstab -U /mnt > /mnt/etc/fstab
 
 arch-chroot /mnt
 ```
-
-### chroot
 
 ```sh
 pacman -S grub efibootmgr dosfstools
@@ -120,11 +132,13 @@ luis18 # user password
 usermod -aG wheel fuis18
 groups fuis18
 
-echo Hacker > /etc/hostname
+echo hacker > /etc/hostname
 
 pacman -S sudo nvim networkmanager
 
 EDITOR=nvim visudo       # habilitar sudo para grupo wheel
+
+# %wheel ALL=(ALL:ALL) ALL
 
 nvim /etc/host
 127.0.0.1  localhost
@@ -169,8 +183,8 @@ nmcli device wifi connect "SSID" password "tu_contraseña"
 ```sh
 sudo su
 pacman -S git
-mkdir Desktop
-cd Desktop
+mkdir Downloads
+cd Downloads
 mkdir repos
 cd repos
 mkdir fuis18

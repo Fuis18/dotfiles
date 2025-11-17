@@ -19,7 +19,7 @@ RESET='\033[0m'
 
 echo ""
 echo -e "${BLUE} =================================="
-echo -e "${GREEN}====== Updating the System ======="
+echo -e "${GREEN} ====== Updating the System ======="
 echo -e "${BLUE} =================================="
 echo -e "${RESET}"
 
@@ -27,7 +27,7 @@ pacman -Syu --noconfirm
 
 echo ""
 echo -e "${BLUE} =================================="
-echo -e "${GREEN}===== Installing Base System ====="
+echo -e "${GREEN} ===== Installing Base System ====="
 echo -e "${BLUE} =================================="
 echo -e "${RESET}"
 
@@ -35,7 +35,7 @@ pacman -S --noconfirm base base-devel xdg-desktop-portal wayland hyprland hyprlo
 
 echo ""
 echo -e "${BLUE} ================================="
-echo -e "${GREEN}====== Installing Terminal ======"
+echo -e "${GREEN} ====== Installing Terminal ======"
 echo -e "${BLUE} ================================="
 echo -e "${RESET}"
 
@@ -45,7 +45,7 @@ pacman -S --noconfirm bat lsd fzf gnu-free-fonts
 
 echo ""
 echo -e "${BLUE} =================================="
-echo -e "${GREEN}=== Instalando el documentador ==="
+echo -e "${GREEN} === Instalando el documentador ==="
 echo -e "${BLUE} =================================="
 echo -e "${RESET}"
 
@@ -53,45 +53,47 @@ pacman -S --noconfirm locate man-db man-pages-es
 
 echo ""
 echo -e "${BLUE} ================================="
-echo -e "${GREEN}===== Network Configuration ====="
+echo -e "${GREEN} ======== Essential tools ========"
+echo -e "${BLUE} ================================="
+echo -e "${RESET}"
+
+pacman -S --noconfirm yazi
+pacman -S --noconfirm brightnessctl wl-clipboard btop swaync libnotify
+pacman -S --noconfirm curl unzip wget
+
+
+echo ""
+echo -e "${BLUE} ================================="
+echo -e "${GREEN} ===== Network Configuration ====="
 echo -e "${BLUE} ================================="
 echo -e "${RESET}"
 
 systemctl enable NetworkManager
 systemctl start NetworkManager
 
-pacman -S --noconfirm wpa_supplicant bluez bluez-utils
+pacman -S --noconfirm wpa_supplicant bluez bluez-utils dbus
 
 systemctl enable wpa_supplicant
 systemctl start wpa_supplicant
 systemctl enable bluetooth
 systemctl start bluetooth
 
-echo ""
-echo -e "${BLUE} ================================="
-echo -e "${GREEN}======== Essential tools ========"
-echo -e "${BLUE} ================================="
-echo -e "${RESET}"
-
-pacman -S --noconfirm yazi lf
-pacman -S --noconfirm brightnessctl wl-clipboard btop swaync libnotify
-pacman -S --noconfirm curl unzip wget
 
 echo ""
 echo -e "${BLUE} ================================="
-echo -e "${GREEN}==== Multimedia applications ===="
+echo -e "${GREEN} ==== Multimedia applications ===="
 echo -e "${BLUE} ================================="
 echo -e "${RESET}"
 
 pacman -S --noconfirm pipewire pipewire-pulse pipewire-alsa
 
-systemctl --user enable pipewire pipewire-pulse wireplumber
+# systemctl --user enable pipewire pipewire-pulse wireplumber
 
 pacman -S --noconfirm cava mpd mpv ncmpcpp
 
 echo ""
 echo -e "${BLUE} ================================="
-echo -e "${GREEN}====== Captura de Pantalla ======"
+echo -e "${GREEN} ====== Captura de Pantalla ======"
 echo -e "${BLUE} ================================="
 echo -e "${RESET}"
 
@@ -99,7 +101,7 @@ pacman -S --noconfirm grim slurp swappy
 
 echo ""
 echo -e "${BLUE} ================================="
-echo -e "${GREEN}======== Logo Arch Linux ========"
+echo -e "${GREEN} ======== Logo Arch Linux ========"
 echo -e "${BLUE}                .         "
 echo -e "                      / \\       "
 echo -e "                     /   \\      "
@@ -116,7 +118,7 @@ pacman -S --noconfirm fastfetch
 
 echo ""
 echo -e "${BLUE} ================================"
-echo -e "${GREEN}=== Configurando el terminal ==="
+echo -e "${GREEN} === Configurando el terminal ==="
 echo -e "${BLUE} ================================"
 echo -e "${RESET}"
 
@@ -128,7 +130,7 @@ sudo -u "${USER_NAME}" wget -qO "${PLUGIN_DIR}/sudo.plugin.zsh" \
 
 echo ""
 echo -e "${BLUE} =================================="
-echo -e "${GREEN}==== Instalando Login Manager ===="
+echo -e "${GREEN} ==== Instalando Login Manager ===="
 echo -e "${BLUE} =================================="
 echo -e "${RESET}"
 
@@ -146,19 +148,24 @@ chmod 644 /etc/greetd/config.toml
 systemctl enable greetd
 
 echo ""
-echo -e "${GREEN}=== Instalando el Editor ==="
+echo -e "${BLUE} ================================"
+echo -e "${GREEN} ===== Instalando el Editor ====="
+echo -e "${BLUE} ================================"
 echo -e "${RESET}"
+
 pacman -S --noconfirm vim neovim
 
 echo ""
 echo -e "${BLUE} =============================="
-echo -e "${GREEN}========= AUR Helper ========="
+echo -e "${GREEN} ========= AUR Helper ========="
 echo -e "${BLUE} =============================="
 echo -e "${RESET}"
 echo ""
 
 echo ""
-echo -e "${GREEN}==== Aur => paru ===="
+echo -e "${BLUE} ============================="
+echo -e "${GREEN} ======== Aur => paru ========"
+echo -e "${BLUE} ============================="
 echo -e "${RESET}"
 
 PARU_DIR="${USER_REPOS}/paru-bin"
@@ -171,7 +178,9 @@ if [[ -d "$PARU_DIR" ]]; then
 fi
 
 echo ""
-echo -e "${GREEN}==== Aur => yay ===="
+echo -e "${BLUE} =============================="
+echo -e "${GREEN} ========= Aur => yay ========="
+echo -e "${BLUE} =============================="
 echo -e "${RESET}"
 
 YAY_DIR="${USER_REPOS}/yay"
@@ -184,17 +193,25 @@ if [[ -d "$YAY_DIR" ]]; then
 fi
 
 echo ""
+echo -e "${BLUE} =============================="
 echo -e "${GREEN}=== paru's Dependencies ==="
+echo -e "${BLUE} =============================="
 echo -e "${RESET}"
-sudo -u fuis18 bash -c 'paru -S wlogout yofi-bin ironbar-bin scrub'
+
+sudo -u fuis18 bash -c 'paru -S wlogout yofi-bin ironbar-bin scrub bluetui'
 
 echo ""
+echo -e "${BLUE} =============================="
 echo -e "${GREEN}=== yay's Dependencies ==="
+echo -e "${BLUE} =============================="
 echo -e "${RESET}"
+
 sudo -u fuis18 bash -c 'yay -S swayimg'
 
 echo ""
+echo -e "${BLUE} =============================="
 echo -e "${GREEN}==== Copiying Root Files ===="
+echo -e "${BLUE} =============================="
 echo -e "${RESET}"
 
 cp -r "${FUIS_REPO}/root/config/." /root/.config/
@@ -204,7 +221,9 @@ cp -r "${FUIS_REPO}/root/zshrc" /root/
 mv /root/zshrc /root/.zshrc
 
 echo ""
+echo -e "${BLUE} =============================="
 echo -e "${GREEN}==== Copiying My Files ===="
+echo -e "${BLUE} =============================="
 echo -e "${RESET}"
 
 cp -r "${FUIS_REPO}/config/." "${USER_HOME}/.config/"
@@ -216,7 +235,7 @@ mv "${USER_HOME}/zshrc" "${USER_HOME}/.zshrc"
 find "${USER_HOME}/.config/hypr/scripts/" -type f -name "*.sh" -exec chmod +x {} \;
 
 echo -e "${BLUE} ================================="
-echo -e "${GREEN}============= Fonts ============="
+echo -e "${GREEN} ============= Fonts ============="
 echo -e "${BLUE} ================================="
 echo -e "${RESET}"
 
@@ -229,7 +248,9 @@ unzip "${USER_HOME}/Downloads/FiraCode.zip" -d /usr/share/fonts
 fc-cache -fv
 
 echo ""
-echo -e "${GREEN}=== Actualizando el Shell ==="
+echo -e "${BLUE} ============================="
+echo -e "${GREEN} === Actualizando el Shell ==="
+echo -e "${BLUE} ============================="
 echo -e "${RESET}"
 
 ZSH_PATH="$(command -v zsh || true)"
@@ -243,7 +264,7 @@ chmod 440 /etc/sudoers.d/wheel
 
 echo ""
 echo -e "${BLUE} =================================="
-echo -e "${GREEN}==== Creating the directories ===="
+echo -e "${GREEN} ==== Creating the directories ===="
 echo -e "${BLUE} =================================="
 echo -e "${RESET}"
 
