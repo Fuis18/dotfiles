@@ -53,7 +53,7 @@ pacman -S --noconfirm discord
 sudo pacman -S --noconfirm syncthing
 sudo pacman -S --noconfirm rclone
 
-systemctl --user enable syncthing.service
+# systemctl --user enable syncthing.service
 
 # agregar música
 # wallpapaers
