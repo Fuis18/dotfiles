@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Manejo de errores
+set -euo pipefail
+
+if [[ $EUID -ne 0 ]]; then
+    echo "Use sudo, need the root"
+    exit 1
+fi
+
+USER_NAME="fuis18"
+USER_HOME="/home/${USER_NAME}"
+
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+RESET='\033[0m'
+
+echo ""
+echo -e "${BLUE} =================================="
+echo -e "${GREEN}====== Updating the System ======="
+echo -e "${BLUE} =================================="
+echo -e "${RESET}"
+
+pacman -Syu --noconfirm
+
+echo ""
+echo -e "${BLUE} =================================="
+echo -e "${GREEN}========== Applications =========="
+echo -e "${BLUE} =================================="
+echo ""
+
+# multimedia
+pacman -S --noconfirm gimp inkscape blender
+pacman -S --noconfirm obs-studio kdenlive
+
+# ofimatica
+sudo pacman -S libreoffice-still
+sudo -u fuis18 bash -c 'yay -S onlyoffice-bin'
+sudo -u fuis18 bash -c 'yay -S obsidian'
+
+sudo -u fuis18 bash -c 'yay -S cmatrix-git'
+
+pacman -S --noconfirm discord
+
+sudo pacman -S --noconfirm syncthing
+sudo pacman -S --noconfirm rclone
+
+echo ""
+echo -e "${BLUE}=================================="
+echo -e "${GREEN}============= READY! ============="
+echo -e "${BLUE}=================================="
+echo ""
+echo ""
+echo ""
+echo ""
+reboot
