@@ -7,8 +7,7 @@ loadkeys la-latin1
 
 iwctl
 
-station list
-station wlan0 scan
+station list scan
 station wlan0 connect "Your_wifi"
 exit
 
@@ -25,20 +24,22 @@ cfdisk
 
 | Device    | Size  | Type             |
 | --------- | ----- | ---------------- |
-| /dev/sda1 | 50G   | Linux filesystem |
-| /dev/sda2 | 512M  | EFI System       |
+| /dev/sda1 | 512M  | EFI System       |
+| /dev/sda2 | 50G   | Linux filesystem |
 | /dev/sda3 | resto | Linux filesystem |
 
 write
 quit
 
+### Formating
+
 ```sh
 lsblk
 
-# Root
-mkfs.ext4 /dev/sda1
 # Primary
-mkfs.fat -F32 /dev/sda2
+mkfs.fat -F32 /dev/sda1
+# Root
+mkfs.ext4 /dev/sda2
 # Home
 mkfs.ext4 /dev/sda3
 ```
@@ -46,12 +47,12 @@ mkfs.ext4 /dev/sda3
 ### Mounts
 
 ```sh
-# Montar root
-mount /dev/sda1 /mnt
-
 # Montar EFI
-mkdir -p /mnt/boot/efi
-mount /dev/sda2 /mnt/boot/efi
+mkdir -p /mnt/boot/
+mount /dev/sda1 /mnt/boot
+
+# Montar root
+mount /dev/sda2 /mnt
 
 # Montar home
 mkdir -p /mnt/home
@@ -60,11 +61,34 @@ mount /dev/sda3 /mnt/home
 lsblk -f
 ```
 
+### Pacstrap
+
+```sh
+pacstrap /mnt base linux linux-firmware
+pacstrap /mnt networkmanager sudo nvim
+
+# CPU
+# Intel
+pacstrap /mnt intel-ucode
+# AMD
+pacstrap /mnt amd-ucode
+```
+
+### Genfstab
+
+```sh
+genfstab -U /mnt > /mnt/etc/fstab
+```
+
+### arch-chroot
+
+```sh
+arch-chroot /mnt
+```
+
 ### Swap
 
 ```sh
-cd /mnt
-
 # Crear el archivo con 10G
 fallocate -l 10G swapfile
 
@@ -77,50 +101,70 @@ swapon --show
 nano /etc/fstab
 ```
 
+Editar fstab:
+
 ```sh
 /swapfile none swap defaults 0 0
 ```
 
-### chroot
+#### Desactivar
 
 ```sh
-cd /
+swapoff /mnt/swapfile
+umount -R /mnt
+```
 
-pacstrap /mnt base linux linux-firmware
+#### bootloader
 
-genfstab -U /mnt > /mnt/etc/fstab
+```sh
+bootctl install
 
-arch-chroot /mnt
+# /boot/EFI/systemd/systemd-bootx64.efi
+# /boot/loader/loader.conf
+# /boot/loader/entries/
+
+cat > /boot/loader/loader.conf <<EOF
+default  arch
+timeout  3
+editor   no
+EOF
+
+# PARTUUID
+blkid -s PARTUUID -o value /dev/sda1
 ```
 
 ```sh
-pacman -S grub efibootmgr dosfstools
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
-grub-mkconfig -o /boot/grub/grub.cfg
+# Intel
+cat > /boot/loader/entries/arch.conf <<EOF
+title   Arch Linux
+linux   /vmlinuz-linux
+initrd  /intel-ucode.img
+initrd  /initramfs-linux.img
+options root=PARTUUID=TU_PARTUUID rw
+EOF
 
-# Poner Microsoft
-mv /boot/efi/EFI/GRUB /boot/efi/EFI/Microsoft
-cp /boot/efi/EFI/Microsoft/grubx64.efi /boot/efi/EFI/Microsoft/bootmgfw.efi
+# AMD
+cat > /boot/loader/entries/arch.conf <<EOF
+title   Arch Linux
+linux   /vmlinuz-linux
+initrd  /amd-ucode.img
+initrd  /initramfs-linux.img
+options root=PARTUUID=TU_PARTUUID rw
+EOF
+```
 
-mkdir -p /boot/efi/EFI/Boot
-cp /boot/efi/EFI/Microsoft/grubx64.efi /boot/efi/EFI/Boot/bootx64.efi
-
+```sh
 ls /boot
 
+# EFI/
+# loader/
 # vmlinuz-linux
+# initramfs-linux.img
 
-ls /boot/efi/EFI/
-
-# /grubx64.efi
-
-efibootmgr -v
-
-# Boot0004* GRUB HD(1,GPT,...)/File(\EFI\GRUB\grubx64.efi)
-
-efibootmgr -o 0004
+mkinitcpio -P
 ```
 
-### id
+### final
 
 ```sh
 passwd
@@ -134,8 +178,6 @@ groups fuis18
 
 echo hacker > /etc/hostname
 
-pacman -S sudo nvim networkmanager
-
 EDITOR=nvim visudo       # habilitar sudo para grupo wheel
 
 # %wheel ALL=(ALL:ALL) ALL
@@ -145,7 +187,7 @@ nvim /etc/host
 ::1        localhost
 127.0.0.1  hacker.localhost hacker
 
-ln -sf /usr/share/zoneinfo/America/Mexico_City /etc/localtime
+ln -sf /usr/share/zoneinfo/America/Lima /etc/localtime
 hwclock --systohc
 date
 
@@ -158,9 +200,6 @@ nvim /etc/vconsole.conf
 KEYMAP=la-latin1
 
 exit
-
-# swapoff /mnt/home/swapfile
-# umount -R /mnt
 
 reboot
 
@@ -191,41 +230,42 @@ mkdir fuis18
 cd fuis18
 git clone https://github.com/Fuis18/dotfiles.git
 cd dotfiles
-sudo bash install_system.sh
-sudo bash install_personal.sh
+
+sudo bash install_system-1.sh
+sudo bash install_system-2.sh
+sudo bash install_system-3.sh
+sudo bash install_personal-1.sh
+sudo bash install_personal-2.sh
 ```
 
 ## PACKAGES
 
-| Label               | Package                 |
-| ------------------- | ----------------------- |
-| General             | git wget unzip makepkg  |
-| Login Manager       | tuigreet                |
-| Protocol            | wayland                 |
-| Window Manager      | hyprland                |
-| Lock Screen         | hyprlock + tauri        |
-| Notificación        | swaync libnotify        |
-| Terminal            | kitty                   |
-| Shell               | zsh                     |
-| customizable prompt | starship                |
-| Syntax Color        | zsh-syntax-highlighting |
-| Autocomplete        | zsh-autosuggestions     |
-| Editor              | neovim                  |
-| Editor plugin       | ncvim                   |
-| File Manager        | thunar                  |
-| Launcher            | yofi                    |
-| Status bar          | waybar -> ironbar       |
-| Widgets             | eww-wayland             |
-| bluetooth           | bluetoothctl            |
-| bluetooth back      | bluez bluez-utils       |
-| Network             | nmcli                   |
-| Network back        | networkmanager          |
-| Audio               | cava                    |
-| Audio back          | pipewire                |
-| Power Options       | wlogout                 |
-| Screenshot          | grim slurp swappy       |
-| Brillo              | brightnessctl           |
-| System monitor      | htop                    |
+| Label               | Package                |
+| ------------------- | ---------------------- |
+| General             | git wget unzip makepkg |
+| Login Manager       | tuigreet               |
+| Protocol            | wayland                |
+| Window Manager      | hyprland               |
+| Lock Screen         | hyprlock + tauri       |
+| Notificación        | swaync libnotify       |
+| Terminal            | kitty                  |
+| Shell               | zsh                    |
+| customizable prompt | starship               |
+| Editor              | nvim                   |
+| File Manager        | yazi                   |
+| Launcher            | yofi                   |
+| Status bar          | waybar -> ironbar      |
+| Widgets             | eww-wayland            |
+| bluetooth           | bluetui                |
+| bluetooth back      | bluez bluez-utils      |
+| Network             | nmcli                  |
+| Network back        | networkmanager         |
+| Audio               | cava                   |
+| Audio back          | pipewire               |
+| Power Options       | wlogout                |
+| Screenshot          | grim slurp swappy      |
+| Brillo              | brightnessctl          |
+| System monitor      | btop                   |
 
 ### Adicionales
 
@@ -259,3 +299,32 @@ Programación:
 
 - Bun
 - docker
+
+#### Grub
+
+```sh
+pacman -S grub efibootmgr dosfstools
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
+grub-mkconfig -o /boot/grub/grub.cfg
+
+# Poner Microsoft
+mv /boot/efi/EFI/GRUB /boot/efi/EFI/Microsoft
+cp /boot/efi/EFI/Microsoft/grubx64.efi /boot/efi/EFI/Microsoft/bootmgfw.efi
+
+mkdir -p /boot/efi/EFI/Boot
+cp /boot/efi/EFI/Microsoft/grubx64.efi /boot/efi/EFI/Boot/bootx64.efi
+
+ls /boot
+
+# vmlinuz-linux
+
+ls /boot/efi/EFI/
+
+# /grubx64.efi
+
+efibootmgr -v
+
+# Boot0004* GRUB HD(1,GPT,...)/File(\EFI\GRUB\grubx64.efi)
+
+efibootmgr -o 0004
+```

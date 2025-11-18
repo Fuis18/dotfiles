@@ -30,9 +30,13 @@ echo -e "${BLUE} =================================="
 echo ""
 
 # programación
-pacman -S --noconfirm docker docker-compose nodejs npm
+pacman -S --noconfirm docker docker-compose nodejs npm nginx
+curl -fsSL https://bun.sh/install | bash
+
 
 sudo usermod -aG docker $USER_NAME
+
+sudo systemctl start nginx
 
 # browsers
 sudo -u fuis18 bash -c 'yay -S librewolf-bin brave-bin'

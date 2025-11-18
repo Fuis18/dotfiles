@@ -30,7 +30,7 @@ echo -e "${BLUE} =================================="
 echo ""
 
 # multimedia
-pacman -S --noconfirm gimp inkscape blender
+pacman -S --noconfirm gimp inkscape blender8
 pacman -S --noconfirm obs-studio kdenlive
 
 # ofimatica

@@ -121,20 +121,6 @@ cp -r "${FUIS_REPO}/root/zshrc" /root/
 # Renombrar
 mv /root/zshrc /root/.zshrc
 
-echo ""
-echo -e "${BLUE} ================================="
-echo -e "${GREEN} ======= Copiying My Files ======="
-echo -e "${BLUE} ================================="
-echo -e "${RESET}"
-
-cp -r "${FUIS_REPO}/config/." "${USER_HOME}/.config/"
-chown -R "${USER_NAME}:${USER_NAME}" "${USER_HOME}/.config"
-
-cp -r "${FUIS_REPO}/zshrc" "${USER_HOME}/"
-mv "${USER_HOME}/zshrc" "${USER_HOME}/.zshrc"
-
-find "${USER_HOME}/.config/hypr/scripts/" -type f -name "*.sh" -exec chmod +x {} \;
-
 echo -e "${BLUE} ================================="
 echo -e "${GREEN} ============= Fonts ============="
 echo -e "${BLUE} ================================="
@@ -162,16 +148,6 @@ usermod --shell "$ZSH_PATH" "$USER_NAME"
 
 echo "%wheel ALL=(ALL) ALL" > /etc/sudoers.d/wheel
 chmod 440 /etc/sudoers.d/wheel
-
-echo ""
-echo -e "${BLUE} =================================="
-echo -e "${GREEN} ==== Creating the directories ===="
-echo -e "${BLUE} =================================="
-echo -e "${RESET}"
-
-mkdir -p "${USER_HOME}/Documents"
-mkdir -p "${USER_HOME}/Music"
-mkdir -p "${USER_HOME}/Pictures"
 
 echo ""
 echo -e "${BLUE}=================================="
