@@ -213,10 +213,10 @@ return {
 			"html",
 			"http",
 			"lua",
-			"mermaid"
+			"mermaid",
 			"prisma",
 			"rust",
-			"toml"
+			"toml",
 			"typescript",
 			"typescriptreact",
 			"markdown",
