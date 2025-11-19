@@ -6,13 +6,17 @@ let {
 
   // left
 
-  $launcher = {
+  $yofi = {
     type = "custom"
-    class = "launcher-yofi"
-    command = "echo 'APPS'"
-    interval = 0
-    tooltip = "launcher"
-    on_click = "yofi"
+    bar = [
+      {
+        type = "button"
+        name = "yofi"
+        class = "yofi"
+        label = "APPS"
+        on_click = "yofi"
+      }
+    ]
   }
 
   $workspaces = {
@@ -108,8 +112,7 @@ let {
         name = "wlogout"
         class = "wlogout"
         label = ""
-        on_click = "!~/.config/hypr/scripts/wlogout.sh",
-        on-click-right: "!~/.config/hypr/scripts/changeBlur"
+        on_click = "!~/.config/hypr/scripts/wlogout.sh"
       }
     ]
   }
@@ -117,9 +120,9 @@ let {
 }
 
 in {
-  position = "bottom"
+  position = "top"
   height = 32
-  start = [$launcher, $workspace, $performance]
+  start = [$yofi $workspaces $performance]
   center = [$oclock]
-  end = [$network, $cava, $volume, $wlogout]
+  end = [$network $cava $volume $wlogout]
 }
