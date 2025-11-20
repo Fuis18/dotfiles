@@ -4,6 +4,8 @@ let {
 // https://github.com/JakeStanger/ironbar/wiki/launcher
 // https://github.com/bluebyt/Wayfire-dots/blob/main/.config/ironbar/config.corn
 
+// pkill ironbar && ironbar &
+
   // left
 
   $yofi = {
@@ -14,28 +16,20 @@ let {
         name = "yofi"
         class = "yofi"
         label = "APPS"
-        on_click = "yofi"
+        on_click = "!yofi"
       }
     ]
   }
 
   $workspaces = {
-      type = "workspaces"
+      type = "workspaces",
+      name_map.1 = ""
+      name_map.2 = ""
+      name_map.3 = ""
+      favorites = [ "1" "2" "3" ]
+      all_monitors = false
       active_only = false
-      all_outputs = true
 
-      // mapping de íconos
-      icons = {
-          "1" = ""
-          "2" = ""
-          "3" = ""
-          empty = ""
-          default = ""
-      }
-      persistent = 3
-
-      // acciones
-      on_click = "activate"
       on_scroll_up = "hyprctl dispatch workspace -1"
       on_scroll_down = "hyprctl dispatch workspace +1"
   }
@@ -51,10 +45,10 @@ let {
 
       format = [
         " {cpu_percent}% | {cpu_frequency} GHz | {temp_c@CPUTIN}°C"
-        " {memory_used} / {memory_total} GB ({memory_available} | {memory_percent2}%) | {swap_used} / {swap_total} GB ({swap_free} | {swap_percent}%)"
+        " {memory_used} / {memory_total} GB ({memory_available} | {memory_percent}%) | {swap_used} / {swap_total} GB ({swap_free} | {swap_percent}%)"
         "󰋊 {disk_used#T@/:.1} / {disk_total#T@/:.1} TB ({disk_percent@/}%) | {disk_read} / {disk_write} MB/s"
-        "󰥔 {uptime}"
       ]
+      on_click = "!kitty -e btop"
   }
 
   // center
@@ -82,7 +76,7 @@ let {
     name = "cava"
     type = "script"
     mode = "watch"
-    cmd = "!~/.config/hypr/scripts/cava.sh"
+    cmd = "/home/fuis18/.config/hypr/scripts/cava.sh"
   }
 
   $volume = {
