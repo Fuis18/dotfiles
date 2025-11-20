@@ -18,14 +18,6 @@ BLUE='\033[0;34m'
 RESET='\033[0m'
 
 echo ""
-echo -e "${BLUE} =================================="
-echo -e "${GREEN} ====== Updating the System ======="
-echo -e "${BLUE} =================================="
-echo -e "${RESET}"
-
-pacman -Syu --noconfirm
-
-echo ""
 echo -e "${BLUE} ================================="
 echo -e "${GREEN} ======= Copiying My Files ======="
 echo -e "${BLUE} ================================="
