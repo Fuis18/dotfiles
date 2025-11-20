@@ -22,7 +22,7 @@ let {
   }
 
   $workspaces = {
-      type = "workspaces",
+      type = "workspaces"
       name_map.1 = ""
       name_map.2 = ""
       name_map.3 = ""
@@ -44,9 +44,11 @@ let {
       interval.disks = 300
 
       format = [
-        " {cpu_percent}% | {cpu_frequency} GHz | {temp_c@CPUTIN}°C"
-        " {memory_used} / {memory_total} GB ({memory_available} | {memory_percent}%) | {swap_used} / {swap_total} GB ({swap_free} | {swap_percent}%)"
+        "  {cpu_percent}% | {cpu_frequency} GHz"
+        "󰈸 {temp_c@['Package id 0']}°C"
+        "  {memory_percent}%"
         "󰋊 {disk_used#T@/:.1} / {disk_total#T@/:.1} TB ({disk_percent@/}%) | {disk_read} / {disk_write} MB/s"
+        "󰥔 {uptime}"
       ]
       on_click = "!kitty -e btop"
   }

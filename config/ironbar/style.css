@@ -17,6 +17,10 @@
 }
 
 .workspaces .item {
+	background-color: @bg_secondary;
+}
+
+.workspaces .item .text-icon {
 	color: @color_regular;
 }
 
@@ -27,6 +31,7 @@
 
 .performance {
 	background-color: @bg_primary;
+	color: @color_regular;
 }
 
 #bar #center {
