@@ -27,7 +27,7 @@ echo ""
 echo -e "${BLUE} =================================="
 echo -e "${GREEN}========== Applications =========="
 echo -e "${BLUE} =================================="
-echo ""
+echo -e "${RESET}"
 
 # programación
 pacman -S --noconfirm docker docker-compose nodejs npm nginx
@@ -49,4 +49,3 @@ echo ""
 echo ""
 echo ""
 echo ""
-reboot

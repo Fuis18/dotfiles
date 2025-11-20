@@ -157,4 +157,4 @@ echo ""
 echo ""
 echo ""
 echo ""
-reboot
+sudo bash "${FUIS_REPO}install_system-3.sh"

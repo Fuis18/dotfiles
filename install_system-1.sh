@@ -31,7 +31,8 @@ echo -e "${GREEN} ===== Installing Base System ====="
 echo -e "${BLUE} =================================="
 echo -e "${RESET}"
 
-pacman -S --noconfirm base base-devel xdg-desktop-portal wayland hyprland hyprlock
+pacman -S --noconfirm base base-devel wayland hyprland hyprlock xdg-desktop-portal xdg-desktop-portal-hyprland
+
 
 echo ""
 echo -e "${BLUE} ================================="
@@ -130,4 +131,4 @@ echo ""
 echo ""
 echo ""
 echo ""
-reboot
+sudo bash "${FUIS_REPO}install_system-2.sh"
