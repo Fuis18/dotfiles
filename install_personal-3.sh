@@ -29,14 +29,14 @@ echo -e "${GREEN}========== Applications =========="
 echo -e "${BLUE} =================================="
 echo ""
 
-# multimedia
-pacman -S --noconfirm gimp inkscape blender
-pacman -S --noconfirm obs-studio kdenlive
+pacman -S --noconfirm muse # musescore
 
-# ofimatica
-sudo -u fuis18 bash -c 'yay -S obsidian'
-sudo pacman -S libreoffice-still
-sudo -u fuis18 bash -c 'yay -S onlyoffice-bin'
+sudo pacman -S --noconfirm syncthing
+sudo pacman -S --noconfirm rclone
+
+pacman -S --noconfirm discord
+
+sudo -u fuis18 bash -c 'yay -S cmatrix-git'
 
 echo ""
 echo -e "${BLUE}=================================="
