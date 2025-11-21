@@ -1,43 +1,54 @@
 @define-color bg_primary #2b305b;
 @define-color bg_secondary #64729d;
+@define-color bg_secondary_btn #54628d;
 @define-color bg_transparent rgba(0, 0, 0, 0);
 @define-color color_regular #e3e3f7;
 @define-color color_disabled #c3c3e7;
 
 .background {
-	background-color: @bg_transparent;
+	background: @bg_transparent;
+}
+
+.item,
+button {
+	border: none;
+	border-radius: 0;
+	text-shadow: none;
+	text-shadow: none;
+	color_regular: @color_regular;
 }
 
 .launcher-yofi {
-	background-color: @bg_primary;
+	background: @bg_primary;
 }
 
 .workspaces {
-	background-color: @bg_secondary;
+	background: @bg_secondary;
 }
 
 .workspaces .item {
-	background-color: @bg_secondary;
+	padding: 5px;
+	margin: 2px;
+	border-radius: 4px;
 }
 
-.workspaces .item .text-icon {
-	color: @color_regular;
+.workspaces .item:nth-child(1) {
+	padding-right: 10px;
 }
 
-.workspaces .item.focused {
-	box-shadow: inherit;
-	text-shadow: inherit;
+.workspaces .item:nth-child(2),
+.workspaces .item:nth-child(3) {
+	padding-right: 15px;
 }
 
 .performance {
-	background-color: @bg_primary;
-	color: @color_regular;
+	background: @bg_primary;
 }
 
 #bar #center {
-	background-color: @bg_secondary;
+	background: @bg_secondary;
 }
 
 .network {
-	background-color: @bg_transparent;
+	background: @bg_transparent;
 }

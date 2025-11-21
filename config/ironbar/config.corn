@@ -8,13 +8,13 @@ let {
 
   // left
 
-  $yofi = {
+  $launcher_yofi = {
     type = "custom"
     bar = [
       {
         type = "button"
         name = "yofi"
-        class = "yofi"
+        class = "launcher-yofi"
         label = "APPS"
         on_click = "!yofi"
       }
@@ -45,10 +45,10 @@ let {
 
       format = [
         "  {cpu_percent}% | {cpu_frequency} GHz"
+        // use hypr/script/temperature.sh
         "󰈸 {temp_c@['Package id 0']}°C"
         "  {memory_percent}%"
-        "󰋊 {disk_used#T@/:.1} / {disk_total#T@/:.1} TB ({disk_percent@/}%) | {disk_read} / {disk_write} MB/s"
-        "󰥔 {uptime}"
+        "󰋊 {disk_percent@/}%"
       ]
       on_click = "!kitty -e btop"
   }
@@ -62,6 +62,7 @@ let {
 
   // right
   $network = {
+    // use hypr/script/network.sh
     type = "sys_info"
     class = "network"
 
@@ -117,8 +118,8 @@ let {
 
 in {
   position = "top"
-  height = 32
-  start = [$yofi $workspaces $performance]
+  height = 34
+  start = [$launcher_yofi $workspaces $performance]
   center = [$oclock]
   end = [$network $cava $volume $wlogout]
 }
