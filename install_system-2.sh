@@ -126,6 +126,8 @@ echo -e "${GREEN} ============= Fonts ============="
 echo -e "${BLUE} ================================="
 echo -e "${RESET}"
 
+noto-fonts noto-fonts-cjk noto-fonts-emoji
+
 chown -R "${USER_NAME}:${USER_NAME}" "${USER_HOME}/Downloads"
 
 wget -O "${USER_HOME}/Downloads/FiraCode.zip" https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip
