@@ -13,7 +13,6 @@ let {
     bar = [
       {
         type = "button"
-        name = "yofi"
         class = "launcher-yofi"
         label = "APPS"
         on_click = "!yofi"
@@ -26,6 +25,7 @@ let {
       name_map.1 = ""
       name_map.2 = ""
       name_map.3 = ""
+      name_map.4 = ":D"
       favorites = [ "1" "2" "3" ]
       all_monitors = false
       active_only = false
@@ -35,22 +35,26 @@ let {
   }
 
   $performance = {
-      type = "sys_info"
-      class = "performance"
-
-      interval.memory = 30
-      interval.cpu = 2
-      interval.temps = 5
-      interval.disks = 300
-
-      format = [
-        "  {cpu_percent}% | {cpu_frequency} GHz"
-        // use hypr/script/temperature.sh
-        "󰈸 {temp_c@['Package id 0']}°C"
-        "  {memory_percent}%"
-        "󰋊 {disk_percent@/}%"
-      ]
+      type = "button"
       on_click = "!kitty -e btop"
+      widgets = [
+        {
+          type = "sys_info"
+          class = "performance"
+
+          interval.cpu = 2
+          interval.temps = 5
+          interval.memory = 30
+          interval.disks = 300
+
+          format = [
+            "  {cpu_percent}% | {cpu_frequency} GHz"
+            "󰈸 {temp_c:coretemp-Package-id-0}°C"
+            "  {memory_percent}%"
+            "󰋊 {disk_percent@/}%"
+          ]
+        }
+      ]
   }
 
   // center
@@ -62,23 +66,29 @@ let {
 
   // right
   $network = {
-    // use hypr/script/network.sh
-    type = "sys_info"
-    class = "network"
+    type = "button"
+    on_click = "!kitty -e btop"
+    widgets = [
+      {
+        type = "sys_info"
+        class = "network"
 
-    interval.networks = 3
+        interval.networks = 3
 
-    format = [
-      "󰓢 {net_down@enp39s0} / {net_up@enp39s0} Mbps"
+        format = [
+          // "󰓢 {net_down:enp2s0} / {net_up:enp2s0} Mbps"
+          "󰓢 {net_down:wlp3s0} / {net_up:wlp3s0} Mbps"
+        ]
+      }
     ]
   }
 
   $cava = {
+    type = "script"
+    class = "cava"
+    mode = "watch"
     transition_type = "slide_end"
     transition_duration = 750
-    name = "cava"
-    type = "script"
-    mode = "watch"
     cmd = "/home/fuis18/.config/hypr/scripts/cava.sh"
   }
 
@@ -93,7 +103,6 @@ let {
     icons.muted = "󰝟"
   }
 
-
   $battery = {
     type = "battery"
     format = "{percentage}%"
@@ -106,7 +115,6 @@ let {
     bar = [
       {
         type = "button"
-        name = "wlogout"
         class = "wlogout"
         label = ""
         on_click = "!~/.config/hypr/scripts/wlogout.sh"
