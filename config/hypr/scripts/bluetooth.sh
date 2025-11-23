@@ -1,4 +1,3 @@
-# $HOME/.config/hypr/scripts/Bluetooth.sh
 #!/bin/bash
 set -eu -o pipefail
 
@@ -21,19 +20,19 @@ connected_count() {
     echo "$cnt"
 }
 
-# Estado principal para la barra
+# Estado principal con clase
 cmd_status() {
     if is_powered; then
         c=$(connected_count)
-        echo "{\"text\":\" $c\",\"class\":\"on\"}"
+        echo ": $c|on"       # texto|clase
     else
-        echo "{\"text\":\"\",\"class\":\"off\"}"
+        echo ": off|off"
     fi
 }
 
-# Alternar bluetui (o abrirlo)
+# Abrir bluetui
 cmd_menu() {
-    kitty -e bluetui
+    kitty -e bluetui &
 }
 
 # Dispatcher

@@ -86,6 +86,11 @@ button,
 .volume {
 	background: @bg_secondary;
 }
+
+.button.bluetooth.off {
+	color: @color_disabled;
+}
+
 .wlogout {
 	background: @bg_primary;
 }

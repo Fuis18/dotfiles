@@ -31,6 +31,7 @@ let {
       active_only = false
 
       on_scroll_up = "hyprctl dispatch workspace -1"
+      // Couldn't focus workspace '-1': A dispatcher returned a non-`ok`, value which is probably an error: Previous workspace doesn't exist.
       on_scroll_down = "hyprctl dispatch workspace +1"
   }
 
@@ -126,10 +127,11 @@ let {
         type = "script"
         mode = "watch"
         interval = 5
-        cmd = "~/.config/hypr/scripts/Bluetooth.sh"
+        cmd = "~/.config/hypr/scripts/bluetooth.sh"
         label = "{text}"
+        class = "{class}"
       }]
-      on_click = "!~/.config/hypr/scripts/Bluetooth.sh menu"
+      on_click = "!~/.config/hypr/scripts/bluetooth.sh menu"
     }]
   }
 
