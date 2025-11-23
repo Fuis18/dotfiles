@@ -25,9 +25,9 @@ cfdisk
 
 | Device    | Size  | Type             |
 | --------- | ----- | ---------------- |
-| /dev/sda1 | 512M  | EFI System       |
+| /dev/sda1 | 1G    | EFI System       |
 | /dev/sda2 | 50G   | Linux filesystem |
-| /dev/sda3 | resto | Linux filesystem |
+| /dev/sda3 | resto | Linux Home       |
 
 write
 quit
@@ -61,12 +61,25 @@ mount /dev/sda3 /mnt/home
 
 lsblk -f
 ```
+### Mount part 2
+
+```sh
+mkdir -p /mnt/proc /mnt/sys /mnt/dev /mnt/run
+
+mount --types proc /proc /mnt/proc
+mount --rbind /sys /mnt/sys
+mount --rbind /dev /mnt/dev
+mount --rbind /run /mnt/run
+```
 
 ### Pacstrap
 
 ```sh
 pacstrap -K /mnt base linux linux-firmware
 pacstrap /mnt networkmanager sudo nvim
+
+ls /mnt/boot
+ls /mnt/lib/modules
 
 vim /mnt/etc/vconsole.conf
 KEYMAP=la-latin1
@@ -116,7 +129,7 @@ Editar fstab:
 
 ```sh
 /swapfile none swap defaults 0 0
-```t
+```
 
 #### Desactivar
 
@@ -134,7 +147,11 @@ rm /boot/loader/entries/*.conf
 
 bootctl install
 
+bootctl --path=/boot install
+
 bootctl
+
+bootctl update
 
 # /boot/EFI/systemd/systemd-bootx64.efi
 # /boot/loader/loader.conf
@@ -188,13 +205,6 @@ EOF
 pacman -S linux
 
 mkinitcpio -P
-
-ls /boot
-
-# EFI/
-# loader/
-# vmlinuz-linux
-# initramfs-linux.img
 ```
 
 ### final

@@ -33,7 +33,6 @@ echo -e "${RESET}"
 
 pacman -S --noconfirm base base-devel wayland hyprland hyprlock xdg-desktop-portal xdg-desktop-portal-hyprland
 
-pacman -S --noconfirm intel-media-player
 pacman -S --noconfirm gst-libav gst-plugins-good gst-plugins-bad gst-plugins-ugly
 
 
@@ -65,6 +64,19 @@ pacman -S --noconfirm brightnessctl wl-clipboard btop swaync libnotify
 pacman -S --noconfirm curl unzip wget lm_sensors
 pacman -S --noconfirm yazi
 
+echo ""
+echo -e "${BLUE} ================================="
+echo -e "${GREEN} =========== Lenguages ==========="
+echo -e "${BLUE} ================================="
+echo -e "${RESET}"
+
+LOCALES=("de_DE.UTF-8" "en_US.UTF-8" "es_ES.UTF-8" "ja_JP.UTF-8")
+
+for locale in "${LOCALES[@]}"; do
+    sed -i "s/^#(${locale} UTF-8)/\1/" /etc/locale.gen
+done
+
+locale-gen
 
 echo ""
 echo -e "${BLUE} ================================="
