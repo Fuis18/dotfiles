@@ -26,6 +26,29 @@ button,
 	background: @bg_transparent;
 }
 
+.l-edge,
+.r-edge,
+.l-edge-second-transparent,
+.r-edge-second-transparent {
+	background: @bg_primary;
+	color: @bg_secondary;
+}
+
+.l-edge-second,
+.r-edge-second,
+.l-edge-transparent,
+.r-edge-transparent {
+	background: @bg_secondary;
+	color: @bg_primary;
+}
+
+.l-edge-transparent,
+.r-edge-transparent,
+.l-edge-second-transparent,
+.r-edge-second-transparent {
+	background: @bg_transparent;
+}
+
 .launcher-yofi,
 .workspaces,
 .performance,
@@ -85,10 +108,6 @@ button,
 .bluetooth,
 .volume {
 	background: @bg_secondary;
-}
-
-.button.bluetooth.off {
-	color: @color_disabled;
 }
 
 .wlogout {
