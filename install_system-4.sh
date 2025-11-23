@@ -28,6 +28,7 @@ chown -R "${USER_NAME}:${USER_NAME}" "${USER_HOME}/.config"
 
 cp -r "${FUIS_REPO}/zshrc" "${USER_HOME}/"
 mv "${USER_HOME}/zshrc" "${USER_HOME}/.zshrc"
+chown "${USER_NAME}:${USER_NAME}" "${USER_HOME}/.zshrc"
 
 find "${USER_HOME}/.config/hypr/scripts/" -type f -name "*.sh" -exec chmod +x {} \;
 
@@ -38,8 +39,11 @@ echo -e "${BLUE} =================================="
 echo -e "${RESET}"
 
 mkdir -p "${USER_HOME}/Documents"
+chown "${USER_NAME}:${USER_NAME}" "${USER_HOME}/Documents"
 mkdir -p "${USER_HOME}/Music"
+chown "${USER_NAME}:${USER_NAME}" "${USER_HOME}/Music"
 mkdir -p "${USER_HOME}/Pictures"
+chown "${USER_NAME}:${USER_NAME}" "${USER_HOME}/Pictures"
 
 echo ""
 echo -e "${BLUE}=================================="

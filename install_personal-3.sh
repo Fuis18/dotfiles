@@ -17,7 +17,7 @@ RESET='\033[0m'
 
 echo ""
 echo -e "${BLUE} =================================="
-echo -e "${GREEN}====== Updating the System ======="
+echo -e "${GREEN} ====== Updating the System ======="
 echo -e "${BLUE} =================================="
 echo -e "${RESET}"
 
@@ -25,24 +25,25 @@ pacman -Syu --noconfirm
 
 echo ""
 echo -e "${BLUE} =================================="
-echo -e "${GREEN}========== Applications =========="
+echo -e "${GREEN} ========== Applications =========="
 echo -e "${BLUE} =================================="
 echo ""
 
-pacman -S --noconfirm muse # musescore
+# multimedia
+pacman -S --noconfirm gimp inkscape blender
+pacman -S --noconfirm obs-studio kdenlive
 
-sudo pacman -S --noconfirm syncthing
-sudo pacman -S --noconfirm rclone
+pacman -S --noconfirm muse # musescore
 
 pacman -S --noconfirm discord
 
 sudo -u fuis18 bash -c 'yay -S cmatrix-git'
 
 echo ""
-echo -e "${BLUE}=================================="
-echo -e "${GREEN}============= READY! ============="
-echo -e "${BLUE}=================================="
-echo ""
+echo -e "${BLUE} =================================="
+echo -e "${GREEN} ======== READY Personal 3 ========"
+echo -e "${BLUE} =================================="
+echo -e "${RESET}"
 echo ""
 echo ""
 echo ""

@@ -73,13 +73,13 @@ echo -e "${GREEN} ============= Fonts ============="
 echo -e "${BLUE} ================================="
 echo -e "${RESET}"
 
-pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji
-
 chown -R "${USER_NAME}:${USER_NAME}" "${USER_HOME}/Downloads"
 
 wget -O "${USER_HOME}/Downloads/FiraCode.zip" https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.zip
 
 unzip "${USER_HOME}/Downloads/FiraCode.zip" -d /usr/share/fonts
+
+pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-dejavu ttf-liberation
 
 fc-cache -fv
 

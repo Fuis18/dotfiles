@@ -17,7 +17,7 @@ RESET='\033[0m'
 
 echo ""
 echo -e "${BLUE} =================================="
-echo -e "${GREEN}====== Updating the System ======="
+echo -e "${GREEN} ====== Updating the System ======="
 echo -e "${BLUE} =================================="
 echo -e "${RESET}"
 
@@ -25,27 +25,21 @@ pacman -Syu --noconfirm
 
 echo ""
 echo -e "${BLUE} =================================="
-echo -e "${GREEN}========== Applications =========="
+echo -e "${GREEN} ========== Applications =========="
 echo -e "${BLUE} =================================="
 echo -e "${RESET}"
-
-# programación
-pacman -S --noconfirm docker docker-compose nodejs npm nginx
-curl -fsSL https://bun.sh/install | bash
-
-
-sudo usermod -aG docker $USER_NAME
-
-sudo systemctl start nginx
 
 # browsers
 sudo -u fuis18 bash -c 'yay -S librewolf-bin brave-bin'
 
+sudo pacman -S --noconfirm syncthing
+sudo pacman -S --noconfirm rclone
+
 echo ""
-echo -e "${BLUE}=================================="
-echo -e "${GREEN}============= READY! ============="
-echo -e "${BLUE}=================================="
-echo ""
+echo -e "${BLUE} =================================="
+echo -e "${GREEN} ======== READY Personal 1 ========"
+echo -e "${BLUE} =================================="
+echo -e "${RESET}"
 echo ""
 echo ""
 echo ""
