@@ -33,6 +33,9 @@ echo -e "${RESET}"
 
 pacman -S --noconfirm base base-devel wayland hyprland hyprlock xdg-desktop-portal xdg-desktop-portal-hyprland
 
+pacman -S --noconfirm intel-media-player
+pacman -S --noconfirm gst-libav gst-plugins-good gst-plugins-bad gst-plugins-ugly
+
 
 echo ""
 echo -e "${BLUE} ================================="
@@ -86,7 +89,8 @@ echo -e "${GREEN} ==== Multimedia applications ===="
 echo -e "${BLUE} ================================="
 echo -e "${RESET}"
 
-pacman -S --noconfirm pipewire pipewire-pulse pipewire-alsa
+pacman -S --noconfirm pipewire pipewire-pulse wireplumber
+pacman -S --noconfirm pipewire-alsa alsa-utils
 
 pacman -S --noconfirm cava mpd mpv ncmpcpp
 
@@ -131,4 +135,4 @@ echo ""
 echo ""
 echo ""
 echo ""
-sudo bash "${FUIS_REPO}install_system-2.sh"
+sudo bash "${FUIS_REPO}/install_system-2.sh"
