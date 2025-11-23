@@ -3,6 +3,7 @@
 ## Instalation
 
 ```sh
+# localectl list-keymaps
 loadkeys la-latin1
 
 iwctl
@@ -37,22 +38,22 @@ quit
 lsblk
 
 # Primary
-mkfs.fat -F32 /dev/sda1
+mkfs.fat -F 32 /dev/sda1
 # Root
 mkfs.ext4 /dev/sda2
 # Home
 mkfs.ext4 /dev/sda3
 ```
 
-### Mounts
+### Mounts (El orden importa)
 
 ```sh
-# Montar EFI
-mkdir -p /mnt/boot/
-mount /dev/sda1 /mnt/boot
-
 # Montar root
 mount /dev/sda2 /mnt
+
+# Montar EFI
+mkdir -p /mnt/boot
+mount /dev/sda1 /mnt/boot
 
 # Montar home
 mkdir -p /mnt/home
@@ -64,26 +65,36 @@ lsblk -f
 ### Pacstrap
 
 ```sh
-pacstrap /mnt base linux linux-firmware
+pacstrap -K /mnt base linux linux-firmware
 pacstrap /mnt networkmanager sudo nvim
 
+vim /mnt/etc/vconsole.conf
+KEYMAP=la-latin1
+
 # CPU
-# Intel
-pacstrap /mnt intel-ucode
-# AMD
-pacstrap /mnt amd-ucode
+lscpu
 ```
+
+| Intel                       | AMD                       |
+| --------------------------- | ------------------------- |
+| `pacstrap /mnt intel-ucode` | `pacstrap /mnt amd-ucode` |
 
 ### Genfstab
 
 ```sh
-genfstab -U /mnt > /mnt/etc/fstab
+rm /mnt/etc/fstab
+
+genfstab -U /mnt >> /mnt/etc/fstab
 ```
 
 ### arch-chroot
 
 ```sh
+mount | grep mnt
+
 arch-chroot /mnt
+
+mount | grep boot
 ```
 
 ### Swap
@@ -92,45 +103,65 @@ arch-chroot /mnt
 # Crear el archivo con 10G
 fallocate -l 10G swapfile
 
-chmod 600 swapfile
+chmod 700 swapfile
 mkswap swapfile
 swapon swapfile
 
 swapon --show
 
-nano /etc/fstab
+nvim /etc/fstab
 ```
 
 Editar fstab:
 
 ```sh
 /swapfile none swap defaults 0 0
-```
+```t
 
 #### Desactivar
 
 ```sh
 swapoff /mnt/swapfile
 umount -R /mnt
+umount -l /mnt
+umount /mnt/home
 ```
 
 #### bootloader
 
 ```sh
+rm /boot/loader/entries/*.conf
+
 bootctl install
+
+bootctl
 
 # /boot/EFI/systemd/systemd-bootx64.efi
 # /boot/loader/loader.conf
 # /boot/loader/entries/
 
+ls -R /boot
+
+# /boot:
+#   EFI initramfs-linux.img intel-ucode.img loader vmlinuz-linux
+# /boot/EFI:
+#   BOOT Linux systemd
+# /boot/EFI/BOOT:
+#   BOOTX64.EFI
+# /boot/loader:
+#   entries entries.srel keys loader.conf random-seed
+# /boot/loader/entries:
+#   arch.conf
+
 cat > /boot/loader/loader.conf <<EOF
-default  arch
+default  arch.conf
 timeout  3
+console-mode max
 editor   no
 EOF
 
 # PARTUUID
-blkid -s PARTUUID -o value /dev/sda1
+blkid -s PARTUUID -o value /dev/sda2
 ```
 
 ```sh
@@ -154,14 +185,16 @@ EOF
 ```
 
 ```sh
+pacman -S linux
+
+mkinitcpio -P
+
 ls /boot
 
 # EFI/
 # loader/
 # vmlinuz-linux
 # initramfs-linux.img
-
-mkinitcpio -P
 ```
 
 ### final
@@ -192,17 +225,21 @@ hwclock --systohc
 date
 
 nvim /etc/locale.gen
+```
+
+```sh
+de_DE
 en_US
 es_ES
-locale-gen
+ja_JP
+```
 
-nvim /etc/vconsole.conf
-KEYMAP=la-latin1
+```sh
+locale-gen
 
 exit
 
 reboot
-
 ```
 
 ## Install
@@ -210,7 +247,6 @@ reboot
 ### NetworkManager
 
 ```sh
-sudo pacman -S networkmanager
 sudo systemctl start NetworkManager.service
 sudo systemctl enable --now NetworkManager.service
 nmcli device
@@ -299,32 +335,3 @@ Programación:
 
 - Bun
 - docker
-
-#### Grub
-
-```sh
-pacman -S grub efibootmgr dosfstools
-grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
-grub-mkconfig -o /boot/grub/grub.cfg
-
-# Poner Microsoft
-mv /boot/efi/EFI/GRUB /boot/efi/EFI/Microsoft
-cp /boot/efi/EFI/Microsoft/grubx64.efi /boot/efi/EFI/Microsoft/bootmgfw.efi
-
-mkdir -p /boot/efi/EFI/Boot
-cp /boot/efi/EFI/Microsoft/grubx64.efi /boot/efi/EFI/Boot/bootx64.efi
-
-ls /boot
-
-# vmlinuz-linux
-
-ls /boot/efi/EFI/
-
-# /grubx64.efi
-
-efibootmgr -v
-
-# Boot0004* GRUB HD(1,GPT,...)/File(\EFI\GRUB\grubx64.efi)
-
-efibootmgr -o 0004
-```
