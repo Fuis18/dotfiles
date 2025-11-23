@@ -2,58 +2,62 @@ let {
 // https://github.com/JakeStanger/ironbar/wiki/
 // https://github.com/bluebyt/Wayfire-dots/blob/main/.config/ironbar/config.corn
 
+  $icon_l = {
+    type = "label"
+    label = ""
+  }
+
+  $icon_r = {
+    type = "label"
+    label = ""
+  }
+
   $upper_l = {
     type = "custom"
     class = "l-edge"
-    bar = [{
-      type = "label"
-      label = ""
-    }]
+    bar = [ $icon_l ]
   }
 
   $upper_r = {
     type = "custom"
     class = "r-edge"
-    bar = [{
-      type = "label"
-      label = ""
-    }]
+    bar = [ $icon_r ]
   }
 
   $upper_l_second = {
     type = "custom"
     class = "l-edge-second"
-    bar = [ $upper_l.bar[0] ]
+    bar = [ $icon_l ]
   }
 
   $upper_r_second = {
     type = "custom"
     class = "r-edge-second"
-    bar = [ $upper_r.bar[0] ]
+    bar = [ $icon_r ]
   }
 
   $upper_l_transp = {
     type = "custom"
     class = "l-edge-transp"
-    bar = [ $upper_l.bar[0] ]
+    bar = [ $icon_l ]
   }
 
   $upper_r_transp = {
     type = "custom"
     class = "r-edge-transp"
-    bar = [ $upper_r.bar[0] ]
+    bar = [ $icon_r ]
   }
 
   $upper_l_second_transp = {
     type = "custom"
     class = "l-edge-second-transp"
-    bar = [ $upper_l.bar[0] ]
+    bar = [ $icon_l ]
   }
 
   $upper_r_second_transp = {
     type = "custom"
     class = "r-edge-second-transp"
-    bar = [ $upper_r.bar[0] ]
+    bar = [ $icon_r ]
   }
 
   // l
