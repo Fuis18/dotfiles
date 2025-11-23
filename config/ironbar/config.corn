@@ -80,25 +80,21 @@ let {
   
   $network = {
     type = "custom"
-    bar = [
-      {
-        type = "button"
-        on_click = "!kitty -e btop"
-        widgets = [
-          {
-            type = "sys_info"
-            class = "network"
+    bar = [{
+      type = "button"
+      on_click = "!kitty -e btop"
+      widgets = [{
+        type = "sys_info"
+        class = "network"
 
-            interval.networks = 3
+        interval.networks = 3
 
-            format = [
-              // "󰓢 {net_down:enp2s0} / {net_up:enp2s0} Mbps"
-              "󰓢 {net_down:wlp3s0} / {net_up:wlp3s0} Mbps"
-            ]
-          }
+        format = [
+          // "󰓢 {net_down:enp2s0} / {net_up:enp2s0} Mbps"
+          "󰓢 {net_down:wlp3s0} / {net_up:wlp3s0} Mbps"
         ]
-      }
-    ]
+      }]
+    }]
   }
 
   $cava = {
@@ -119,6 +115,22 @@ let {
     icons.volume_medium = "󰖀"
     icons.volume_low = "󰕿"
     icons.muted = "󰝟"
+  }
+
+  $bluetooth = {
+    type = "custom"
+    bar = [{
+      type = "button"
+      widgets = [{
+        class = "bluetooth"
+        type = "script"
+        mode = "watch"
+        interval = 5
+        cmd = "~/.config/hypr/scripts/Bluetooth.sh"
+        label = "{text}"
+      }]
+      on_click = "!~/.config/hypr/scripts/Bluetooth.sh menu"
+    }]
   }
 
   $battery = {

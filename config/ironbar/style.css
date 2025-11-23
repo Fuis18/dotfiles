@@ -9,6 +9,10 @@
 	background: @bg_transparent;
 }
 
+#bar {
+	font-family: FiraCode Nerd Font, sans-serif;
+}
+
 .item,
 button,
 .label,
@@ -30,6 +34,7 @@ button,
 .network,
 .cava,
 .volume,
+.bluetooth,
 .wlogout {
 	padding: 2px 10px;
 }
@@ -47,6 +52,10 @@ button,
 	margin: 2px;
 	border-radius: 4px;
 	background: @bg_secondary_btn;
+}
+
+.workspaces .item.inactive {
+	color: @color_disabled;
 }
 
 .workspaces .item:nth-child(1) {
@@ -73,6 +82,7 @@ button,
 .cava {
 	background: @bg_primary;
 }
+.bluetooth,
 .volume {
 	background: @bg_secondary;
 }
