@@ -34,16 +34,16 @@ button,
 .r-edge,
 .l-edge-transp,
 .r-edge-transp {
-	color: @bg_secondary;
-	background: @bg_primary;
+	color: @bg_primary;
+	background: @bg_secondary;
 }
 
 .l-edge-second,
 .r-edge-second,
 .l-edge-second-transp,
 .r-edge-second-transp {
-	color: @bg_primary;
-	background: @bg_secondary;
+	color: @bg_secondary;
+	background: @bg_primary;
 }
 
 .l-edge-transp,
