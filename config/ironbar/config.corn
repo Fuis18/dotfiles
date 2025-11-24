@@ -238,6 +238,7 @@ let {
     $volume
     $bluetooth
     $upper_r
+    $memory
     $wlogout
   ]
 }
