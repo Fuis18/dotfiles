@@ -24,9 +24,9 @@ connected_count() {
 cmd_status() {
     if is_powered; then
         c=$(connected_count)
-        echo ": $c|on"       # texto|clase
+        echo "<span foreground='#e3e3f7'>: $c</span>"
     else
-        echo ": off|off"
+        echo "<span foreground='#c3c3e7'>: off</span>"
     fi
 }
 

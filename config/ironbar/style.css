@@ -26,26 +26,30 @@ button,
 	background: @bg_transparent;
 }
 
+.icon {
+	font-size: 34px;
+}
+
 .l-edge,
 .r-edge,
-.l-edge-second-transparent,
-.r-edge-second-transparent {
-	background: @bg_primary;
+.l-edge-transp,
+.r-edge-transp {
 	color: @bg_secondary;
+	background: @bg_primary;
 }
 
 .l-edge-second,
 .r-edge-second,
-.l-edge-transparent,
-.r-edge-transparent {
-	background: @bg_secondary;
+.l-edge-second-transp,
+.r-edge-second-transp {
 	color: @bg_primary;
+	background: @bg_secondary;
 }
 
-.l-edge-transparent,
-.r-edge-transparent,
-.l-edge-second-transparent,
-.r-edge-second-transparent {
+.l-edge-transp,
+.r-edge-transp,
+.l-edge-second-transp,
+.r-edge-second-transp {
 	background: @bg_transparent;
 }
 
@@ -59,7 +63,7 @@ button,
 .volume,
 .bluetooth,
 .wlogout {
-	padding: 2px 10px;
+	padding: 0 10px;
 }
 
 .launcher-yofi {
@@ -94,8 +98,7 @@ button,
 	background: @bg_primary;
 }
 
-#bar #center,
-#bar #center .item {
+.clock {
 	background: @bg_secondary;
 }
 

@@ -4,11 +4,13 @@ let {
 
   $icon_l = {
     type = "label"
+    class = "icon"
     label = ""
   }
 
   $icon_r = {
     type = "label"
+    class = "icon"
     label = ""
   }
 
@@ -64,14 +66,12 @@ let {
 
   $launcher_yofi = {
     type = "custom"
-    bar = [
-      {
-        type = "button"
-        class = "launcher-yofi"
-        label = "APPS"
-        on_click = "!yofi"
-      }
-    ]
+    bar = [{
+      type = "button"
+      class = "launcher-yofi"
+      label = "APPS"
+      on_click = "!yofi"
+    }]
   }
 
   $workspaces = {
@@ -81,7 +81,7 @@ let {
     name_map.3 = ""
     name_map.4 = ":D"
     
-    favorites = { all = [ "1" "2" "3" ]}
+    // favorites = [ "1" "2" "3" ]
 
     on_scroll_up = "hyprctl dispatch workspace -1"
     on_scroll_down = "hyprctl dispatch workspace +1"
@@ -89,30 +89,22 @@ let {
 
   $performance = {
     type = "custom"
-    bar = [
-      {
-        type = "button"
-        on_click = "!kitty -e btop"
-        widgets = [
-          {
-            type = "sys_info"
-            class = "performance"
+    bar = [{
+      type = "button"
+      on_click = "!kitty -e btop"
+      widgets = [{
+        type = "sys_info"
+        class = "performance"
 
-            interval.cpu = 2
-            interval.temps = 5
-            interval.memory = 30
-            interval.disks = 300
+        interval.cpu = 2
+        interval.temps = 5
 
-            format = [
-              "  {cpu_percent}%"
-              "󰈸 {temp_c:coretemp-Package-id-0}°C"
-              "  {memory_percent}%"
-              "󰋊 {disk_percent@/}%"
-            ]
-          }
-        ] 
-      }
-    ]
+        format = [
+          "  {cpu_percent}%"
+          "󰈸 {temp_c:coretemp-Package-id-0}°C"
+        ]
+      }] 
+    }]
   }
 
   $window = {
@@ -129,7 +121,7 @@ let {
     format = "%d/%m/%Y %H:%M"
   }
 
-  // r
+  // right
   
   $network = {
     type = "custom"
@@ -186,6 +178,26 @@ let {
     }]
   }
 
+  $memory = {
+    type = "custom"
+    bar = [{
+      type = "button"
+      on_click = "!kitty -e btop"
+      widgets = [{
+        type = "sys_info"
+        class = "memory"
+
+        interval.memory = 30
+        interval.disks = 300
+
+        format = [
+          "  {memory_percent}%"
+          "󰋊 {disk_percent@/}%"
+        ]
+      }] 
+    }]
+  }
+
   $battery = {
     type = "battery"
     format = "{percentage}%"
@@ -205,11 +217,9 @@ let {
     ]
   }
 
-}
-
-in {
+} in {
   position = "top"
-  height = 34
+  height = 32
   start = [
     $launcher_yofi
     $upper_l
@@ -219,7 +229,7 @@ in {
     $upper_l_transp
     $window
   ]
-  center = [ $oclock ]
+  center = [ $upper_r_second_transp $oclock $upper_l_second_transp ]
   end = [
     $network
     $upper_r_transp
