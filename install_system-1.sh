@@ -104,7 +104,7 @@ echo -e "${RESET}"
 pacman -S --noconfirm pipewire pipewire-pulse wireplumber
 pacman -S --noconfirm pipewire-alsa alsa-utils
 
-pacman -S --noconfirm cava mpd mpv ncmpcpp
+pacman -S --noconfirm cava mpd mpc mpv ncmpcpp
 
 echo ""
 echo -e "${BLUE} ================================="

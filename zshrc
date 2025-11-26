@@ -1,3 +1,5 @@
+# ~/.zshrc
+
 # Fix the Java Problem
 export _JAVA_AWT_WM_NONREPARENTING=1
 # Install Bun
@@ -60,9 +62,10 @@ alias cat='bat'
 # Images
 alias icat='kitty +kitten icat'
 # alias for wifi
-alias wifi="kitty nmtui"
+alias wifi="nmtui"
 # alias for searching and installing packages
 alias pacs="pacman -Slq | fzf -m --preview 'pacman -Si {} ; pacman -Fl {} | awk \"{print \\$2}\"' | xargs -ro sudo pacman -S"
+alias mp3="ncmpcpp"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
