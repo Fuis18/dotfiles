@@ -11,12 +11,14 @@ connected_count() {
     cnt=0
     devices=$(bluetoothctl devices 2>/dev/null)
     [ -z "$devices" ] && echo 0 && return
+
     while IFS= read -r line; do
-        mac=$(awk '{print $1}' <<<"$line")
+        mac=$(awk '{print $2}' <<<"$line")
         if bluetoothctl info "$mac" 2>/dev/null | grep -q "Connected: yes"; then
             cnt=$((cnt+1))
         fi
     done <<< "$devices"
+
     echo "$cnt"
 }
 

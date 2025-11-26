@@ -27,7 +27,7 @@ button,
 }
 
 .icon {
-	font-size: 34px;
+	font-size: 30px;
 }
 
 .l-edge,
@@ -62,11 +62,13 @@ button,
 .cava,
 .volume,
 .bluetooth,
+.memory,
 .wlogout {
 	padding: 0 10px;
 }
 
 .launcher-yofi {
+	padding-left: 15px;
 	background: @bg_primary;
 }
 
@@ -116,4 +118,8 @@ button,
 .memory,
 .wlogout {
 	background: @bg_primary;
+}
+
+.wlogout {
+	padding-right: 15px;
 }

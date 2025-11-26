@@ -112,6 +112,7 @@ let {
     class = "window"
     show_icon = true
     show_title = true
+    truncate	= "end"
   }
 
   // center

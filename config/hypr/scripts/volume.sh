@@ -14,8 +14,8 @@ get_volume() {
         echo "Muted"
     else
         # Else extract the volume percentage
-        volume=$(pactl get-sink-volume @DEFAULT_SINK@ | awk '/Volume:/{print $5; exit}')
-        echo "${volume} %"
+        volume=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oE '[0-9]{1,3}%' | head -n1)
+        echo "$volume"
     fi
 }
 
@@ -44,25 +44,43 @@ get_icon() {
 
 #* Notify
 notify_user() {
-    if [[ "$(get_volume)" == "Muted" ]]; then
-        notify-send -e -h string:x-canonical-private-synchronous:volume_notif -u low -i "$(get_icon)" " Volume:" " Muted"
+    local vol icon numeric
+    vol=$(get_volume)
+
+    if [[ "$vol" == "Muted" ]]; then
+        notify-send -e -h string:x-canonical-private-synchronous:volume_notif \
+            -u low -i "$(get_icon)" " Volume:" " Muted"
     else
-        notify-send -e -h int:value:"$(get_volume | sed 's/%//')" -h string:x-canonical-private-synchronous:volume_notif -u low -i "$(get_icon)" " Volume Level:" " $(get_volume)"
+        numeric=$(echo "$vol" | grep -oE '[0-9]{1,3}')
+        notify-send -e -h int:value:"$numeric" \
+            -h string:x-canonical-private-synchronous:volume_notif \
+            -u low -i "$(get_icon)" " Volume Level:" " $vol"
     fi
 }
 
+
 # Increase Volume
 inc_volume() {
-    pactl set-sink-volume @DEFAULT_SINK@ +5% && notify_user
+    local vol new
+    vol=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oE '[0-9]{1,3}%' | head -n1 | tr -d '%')
+    new=$((vol + 5))
+    # Limit
+    (( new > 100 )) && new=100
+
+    pactl set-sink-volume @DEFAULT_SINK@ "${new}%"
+    notify_user
 }
 
 # Decrease Volume
 dec_volume() {
-    if pactl get-sink-mute @DEFAULT_SINK@ | grep -q "yes"; then
-        toggle_mute
-    else
-        pactl set-sink-volume @DEFAULT_SINK@ -5% && notify_user
-    fi
+    local vol new
+    vol=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oE '[0-9]{1,3}%' | head -n1 | tr -d '%')
+    new=$((vol - 5))
+    # Limit
+    (( new < 0 )) && new=0
+
+    pactl set-sink-volume @DEFAULT_SINK@ "${new}%"
+    notify_user
 }
 
 # Toggle Mute
