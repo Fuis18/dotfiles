@@ -1,17 +1,18 @@
 window {
 	font-family: FiraCode Nerd Font;
 	font-size: 16pt;
-	color: #cdd6f4; /* text */
 	background-color: rgba(30, 30, 46, 0.6);
 }
 
 button {
+	color: #cdd6f4; /* text */
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 20%;
 	background-color: rgba(200, 220, 255, 0);
 	border-radius: 50px; /* Increased border radius for a more rounded look */
 	margin: 5px;
+	text-shadow: none;
 }
 
 button:focus {

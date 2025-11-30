@@ -128,7 +128,7 @@ let {
     type = "custom"
     bar = [{
       type = "button"
-      on_click = "!kitty -e btop"
+      on_click = "!kitty -e nmtui"
       widgets = [{
         type = "sys_info"
         class = "network"
@@ -153,14 +153,21 @@ let {
   }
 
   $volume = {
-    type = "volume"
-    format = "{icon} {percentage}%"
-    max_volume = 100
-    truncate = "end"
-    icons.volume_high = "󰕾"
-    icons.volume_medium = "󰖀"
-    icons.volume_low = "󰕿"
-    icons.muted = "󰝟"
+    type = "custom"
+    bar = [{
+      type = "button"
+      on_click "!kitty -e pulsemixer"
+      widgets = [{
+        type = "volume"
+        format = "{icon} {percentage}%"
+        max_volume = 100
+        truncate = "end"
+        icons.volume_high = "󰕾"
+        icons.volume_medium = "󰖀"
+        icons.volume_low = "󰕿"
+        icons.muted = "󰝟"
+      }]
+    }]
   }
 
   $bluetooth = {
