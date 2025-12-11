@@ -144,19 +144,37 @@ let {
   }
 
   $cava = {
-    type = "script"
-    class = "cava"
-    mode = "watch"
-    transition_type = "slide_end"
-    transition_duration = 750
-    cmd = "~/.config/hypr/scripts/cava.sh"
+    type = "custom"
+    bar = [{
+      type = "button"
+      on_click = "toggle:popup-music"
+      widgets = [{
+        type = "script"
+        class = "cava"
+        mode = "watch"
+        transition_type = "slide_end"
+        transition_duration = 750
+        cmd = "~/.config/hypr/scripts/cava.sh"
+      }]
+    }]
+  }
+
+  $music = {
+    type = "music"
+    player_type = "mpris"
+    format = "{title} - {artist}"
+    icons.play = ""
+    icons.pause = ""
+    icons.prev = "󰒮"
+    icons.next = "󰒭"
+    show_status_icon = false
   }
 
   $volume = {
     type = "custom"
     bar = [{
       type = "button"
-      on_click "!kitty -e pulsemixer"
+      on_click = "!kitty -e pulsemixer"
       widgets = [{
         type = "volume"
         format = "{icon} {percentage}%"
@@ -248,5 +266,9 @@ let {
     $upper_r
     $memory
     $wlogout
+  ]
+
+  extra = [
+    { type = "music", id = "popup-music", popup = true }
   ]
 }

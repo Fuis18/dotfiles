@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# scripts/cava.sh
 #----- Optimized bars animation without much CPU usage increase --------
 
 bar="▁▂▃▄▅▆▇█"
