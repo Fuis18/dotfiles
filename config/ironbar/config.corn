@@ -268,11 +268,15 @@ let {
     $wlogout
   ]
 
-  extra = [
+  popups = [
     {
-      type: "music"
-      id: "popup-music"
-      popup: true
+      id = "popup-music"
+      widget = {
+        type = "music"
+        player_type = "mpris"
+        format = "{title} - {artist}"
+        show_status_icon = false
+      }
     }
   ]
 }
