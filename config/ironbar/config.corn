@@ -192,6 +192,7 @@ let {
     type = "custom"
     bar = [{
       type = "button"
+      on_click = "!~/.config/hypr/scripts/bluetooth.sh menu"
       widgets = [{
         class = "bluetooth"
         type = "script"
@@ -200,7 +201,6 @@ let {
         cmd = "~/.config/hypr/scripts/bluetooth.sh"
         label = "{text}"
       }]
-      on_click = "!~/.config/hypr/scripts/bluetooth.sh menu"
     }]
   }
 
@@ -269,6 +269,10 @@ let {
   ]
 
   extra = [
-    { type = "music", id = "popup-music", popup = true }
+    {
+      type: "music"
+      id: "popup-music"
+      popup: true
+    }
   ]
 }
