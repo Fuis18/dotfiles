@@ -157,6 +157,16 @@ let {
         cmd = "~/.config/hypr/scripts/cava.sh"
       }]
     }]
+    popup = [{
+      type = "box"
+      orientation = "vertical"
+      widgets = [{
+        type = "music"
+        player_type = "mpris"
+        format = "{title} - {artist}"
+        show_status_icon = false
+      }]
+    }]
   }
 
   $music = {
@@ -266,17 +276,5 @@ let {
     $upper_r
     $memory
     $wlogout
-  ]
-
-  popups = [
-    {
-      id = "popup-music"
-      widget = {
-        type = "music"
-        player_type = "mpris"
-        format = "{title} - {artist}"
-        show_status_icon = false
-      }
-    }
   ]
 }
