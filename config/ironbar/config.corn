@@ -145,28 +145,39 @@ let {
 
   $cava = {
     type = "custom"
-    bar = [{
-      type = "button"
-      on_click = "toggle:popup-music"
-      widgets = [{
+    class = "cava-menu"
+
+    bar = [
+      {
         type = "script"
         class = "cava"
         mode = "watch"
         transition_type = "slide_end"
         transition_duration = 750
         cmd = "~/.config/hypr/scripts/cava.sh"
-      }]
-    }]
-    popup = [{
-      type = "box"
-      orientation = "vertical"
-      widgets = [{
-        type = "music"
-        player_type = "mpris"
-        format = "{title} - {artist}"
-        show_status_icon = false
-      }]
-    }]
+      }
+      
+      {
+        type = "button"
+        class = "cava-button"
+        on_click = "popup:toggle"
+      }
+    ]
+
+    popup = [
+      {
+        type = "box"
+        orientation = "vertical"
+        widgets = [
+          {
+            type = "music"
+            player_type = "mpris"
+            format = "{title} - {artist}"
+            show_status_icon = false
+          }
+        ]
+      }
+    ]
   }
 
   $music = {
