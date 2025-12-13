@@ -76,8 +76,8 @@ let {
 
   $workspaces = {
     type = "workspaces"
-    name_map.1 = ""
-    name_map.2 = ""
+    name_map.1 = ""
+    name_map.2 = ""
     name_map.3 = ""
     name_map.4 = ":D"
     
@@ -149,18 +149,17 @@ let {
 
     bar = [
       {
-        type = "script"
-        class = "cava"
-        mode = "watch"
-        transition_type = "slide_end"
-        transition_duration = 750
-        cmd = "~/.config/hypr/scripts/cava.sh"
-      }
-      
-      {
         type = "button"
         class = "cava-button"
         on_click = "popup:toggle"
+        widgets = [{
+          type = "script"
+          class = "cava"
+          mode = "watch"
+          transition_type = "slide_end"
+          transition_duration = 750
+          cmd = "~/.config/hypr/scripts/cava.sh"
+        }]
       }
     ]
 
