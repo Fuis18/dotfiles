@@ -61,16 +61,6 @@ mount /dev/sda3 /mnt/home
 
 lsblk -f
 ```
-### Mount part 2
-
-```sh
-mkdir -p /mnt/proc /mnt/sys /mnt/dev /mnt/run
-
-mount --types proc /proc /mnt/proc
-mount --rbind /sys /mnt/sys
-mount --rbind /dev /mnt/dev
-mount --rbind /run /mnt/run
-```
 
 ### Pacstrap
 
@@ -78,11 +68,12 @@ mount --rbind /run /mnt/run
 pacstrap -K /mnt base linux linux-firmware
 pacstrap /mnt networkmanager sudo nvim
 
+nvim /mnt/etc/vconsole.conf
+KEYMAP=la-latin1
+XKBLAYOUT=latam
+
 ls /mnt/boot
 ls /mnt/lib/modules
-
-vim /mnt/etc/vconsole.conf
-KEYMAP=la-latin1
 
 # CPU
 lscpu
@@ -110,6 +101,15 @@ arch-chroot /mnt
 mount | grep boot
 ```
 
+#### Desactivar
+
+```sh
+swapoff /mnt/swapfile
+umount -R /mnt
+umount -l /mnt
+umount /mnt/home
+```
+
 ### Swap
 
 ```sh
@@ -128,16 +128,10 @@ nvim /etc/fstab
 Editar fstab:
 
 ```sh
+# /dev/sda1
+UUID=XXXX-XXXX  /boot  vfat  rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro  0  2
+
 /swapfile none swap defaults 0 0
-```
-
-#### Desactivar
-
-```sh
-swapoff /mnt/swapfile
-umount -R /mnt
-umount -l /mnt
-umount /mnt/home
 ```
 
 #### bootloader
@@ -177,8 +171,10 @@ console-mode max
 editor   no
 EOF
 
-# PARTUUID
-blkid -s PARTUUID -o value /dev/sda2
+# UUID
+blkid /dev/sda2
+
+# blkid -s PARTUUID -o value /dev/sda2
 ```
 
 ```sh
@@ -188,7 +184,7 @@ title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /intel-ucode.img
 initrd  /initramfs-linux.img
-options root=PARTUUID=TU_PARTUUID rw
+options root=UUID=TU_UUID rw
 EOF
 
 # AMD
@@ -197,7 +193,7 @@ title   Arch Linux
 linux   /vmlinuz-linux
 initrd  /amd-ucode.img
 initrd  /initramfs-linux.img
-options root=PARTUUID=TU_PARTUUID rw
+options root=UUID=TU_UUID rw
 EOF
 ```
 
@@ -247,6 +243,8 @@ ja_JP
 ```sh
 locale-gen
 
+bootctl list
+
 exit
 
 reboot
@@ -257,6 +255,8 @@ reboot
 ### NetworkManager
 
 ```sh
+sudo pacman -Sy
+
 sudo systemctl start NetworkManager.service
 sudo systemctl enable --now NetworkManager.service
 nmcli device
@@ -274,7 +274,7 @@ mkdir repos
 cd repos
 mkdir fuis18
 cd fuis18
-git clone https://github.com/Fuis18/dotfiles.git
+git clone https://github.com/fuis18/dotfiles.git
 cd dotfiles
 
 sudo bash install_system-1.sh

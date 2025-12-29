@@ -32,6 +32,7 @@ echo -e "${BLUE} =================================="
 echo -e "${RESET}"
 
 pacman -S --noconfirm base base-devel wayland hyprland hyprlock
+pacman -S --noconfirm qt6-base qt6-declartive qt6-quick3d qt6-graphs
 
 echo ""
 echo -e "${BLUE} =================================="
@@ -81,7 +82,7 @@ pacman -S --noconfirm papirus-icon-theme
 
 sudo -u fuis18 bash -c 'yay -S papirus-folders-catppuccin-git catppuccin-gtk-theme-mocha'
 
-papirus-folders -C catppuccin-mocha --theme Papirus-Dark
+papirus-folders -C cat-mocha-blue --theme Papirus-Dark
 
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
 
@@ -156,10 +157,8 @@ echo -e "${RESET}"
 pacman -S --noconfirm gst-libav gst-plugins-good gst-plugins-bad gst-plugins-ugly
 pacman -S --noconfirm pipewire pipewire-pulse wireplumber
 pacman -S --noconfirm pipewire-alsa alsa-utils
-
-pacman -S --noconfirm pulsemixer
-
-pacman -S --noconfirm cava mpd mpc mpv ncmpcpp
+pacman -S --noconfirm mpd mpc mpv ncmpcpp fftw lsp-plugins-lv2
+pacman -S --noconfirm pulsemixer cava easyeffects rubberband
 
 echo ""
 echo -e "${BLUE} ================================="

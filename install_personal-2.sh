@@ -30,9 +30,9 @@ echo -e "${BLUE} =================================="
 echo ""
 
 # programación
-pacman -S --noconfirm docker docker-compose nodejs npm nginx
-curl -fsSL https://bun.sh/install | bash
+pacman -S --noconfirm docker docker-compose docker-buildx
 
+paru -S oxker
 
 sudo usermod -aG docker $USER_NAME
 

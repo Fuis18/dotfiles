@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Manejo de errores
+set -euo pipefail
+
 USER_NAME="fuis18"
 USER_HOME="/home/${USER_NAME}"
 
