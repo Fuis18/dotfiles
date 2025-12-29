@@ -80,7 +80,7 @@ echo -e "${RESET}"
 pacman -S --noconfirm xdg-desktop-portal xdg-desktop-portal-hyprland xdg-desktop-portal-gtk
 pacman -S --noconfirm papirus-icon-theme
 
-sudo -u fuis18 bash -c 'yay -S papirus-folders-catppuccin-git catppuccin-gtk-theme-mocha'
+sudo -u fuis18 bash -c 'paru -S papirus-folders-catppuccin-git catppuccin-gtk-theme-mocha'
 
 papirus-folders -C cat-mocha-blue --theme Papirus-Dark
 
