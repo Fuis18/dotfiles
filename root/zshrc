@@ -20,20 +20,28 @@ PATH=/root/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/
 autoload -Uz compinit
 compinit
 
+# Autosuggestions (inline)
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+ZSH_AUTOSUGGEST_USE_ASYNC=true
+
+bindkey '^[[C' autosuggest-accept
+
+# Autocomplete (list)
 source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
-# ---- zsh-autocomplete (historial automático) ----
 # Mostrar lista automáticamente al escribir
-zstyle ':autocomplete:*' min-input 1
-zstyle ':autocomplete:*' delay 0.05
+# zstyle ':autocomplete:*' min-input 1
+# zstyle ':autocomplete:*' delay 0.05
 
 # NO activar con buffer vacío
-zstyle ':autocomplete:*' min-input 2
+#zstyle ':autocomplete:*' min-input 2
 # Lista visible debajo
 zstyle ':autocomplete:*' list-lines 8
 zstyle ':autocomplete:*' widget-style menu-select
 # No activar por ESC / Meta (SUPER)
-zstyle ':autocomplete:*' ignored-input '^\e.*'
+# zstyle ':autocomplete:*' ignored-input '^\e.*'
 # No auto-confirmar la primera opción
 zstyle ':autocomplete:*' auto-select false
 # Orden lógico
@@ -52,10 +60,10 @@ bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^[[3~" delete-char
 bindkey "^[[1;3D" backward-word
-# No capturar SPACE (importante para WM keybinds)
-bindkey ' ' self-insert
-zstyle ':autocomplete:*' complete-word no
 
+# No capturar SPACE (importante para WM keybinds)
+# bindkey ' ' self-insert
+# zstyle ':autocomplete:*' complete-word no
 
 # ---| Correction  and Autocompletion |--- #
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
