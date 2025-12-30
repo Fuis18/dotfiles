@@ -32,7 +32,7 @@ echo -e "${BLUE} =================================="
 echo -e "${RESET}"
 
 pacman -S --noconfirm base base-devel wayland hyprland hyprlock
-pacman -S --noconfirm qt6-base qt6-declartive qt6-quick3d qt6-graphs
+pacman -S --noconfirm qt6-base qt6-declarative qt6-quick3d qt6-graphs
 
 echo ""
 echo -e "${BLUE} =================================="
@@ -47,11 +47,11 @@ echo -e "${GREEN} ========== Aur => paru =========="
 echo -e "${BLUE} ================================="
 echo -e "${RESET}"
 
-PARU_DIR="${USER_REPOS}/paru-bin"
+PARU_DIR="${USER_REPOS}/paru"
 if [[ -d "$PARU_DIR" ]]; then
   echo -e "${GREEN}[!] Directorio '$PARU_DIR' ya existe.${RESET}"
   else
-  git clone https://aur.archlinux.org/paru-bin.git "$PARU_DIR"
+  git clone https://aur.archlinux.org/paru.git "$PARU_DIR"
   chown -R "${USER_NAME}:${USER_NAME}" "$PARU_DIR"
   sudo -u "${USER_NAME}" bash -c "cd '$PARU_DIR' && makepkg -si --noconfirm"
 fi
@@ -87,7 +87,7 @@ papirus-folders -C cat-mocha-blue --theme Papirus-Dark
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
 
 sudo -u fuis18 bash -c 'paru -S wlogout yofi-bin'
-sudo -u fuis18 bash -c 'paru -S ironbar-bin scrub bluetui'
+sudo -u fuis18 bash -c 'paru -S ironbar-bin scrub'
 
 echo ""
 echo -e "${BLUE} ================================="
@@ -126,10 +126,11 @@ echo -e "${RESET}"
 LOCALES=("de_DE.UTF-8" "en_US.UTF-8" "es_ES.UTF-8" "ja_JP.UTF-8")
 
 for locale in "${LOCALES[@]}"; do
-    sed -i "s/^#(${locale} UTF-8)/\1/" /etc/locale.gen
+    sed -i "s/^# ${locale} UTF-8/${locale} UTF-8/" /etc/locale.gen
 done
 
 locale-gen
+
 
 echo ""
 echo -e "${BLUE} ================================="
@@ -147,6 +148,7 @@ systemctl start wpa_supplicant
 systemctl enable bluetooth
 systemctl start bluetooth
 
+sudo -u fuis18 bash -c 'paru -S bluetui'
 
 echo ""
 echo -e "${BLUE} ================================="
