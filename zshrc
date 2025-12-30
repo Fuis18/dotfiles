@@ -2,13 +2,10 @@
 
 # Fix the Java Problem
 export _JAVA_AWT_WM_NONREPARENTING=1
-
 export SYSTEMD_PAGER=cat
 
 # Enable history
 setopt histignorealldups sharehistory
-
-# Use emacs keybindings even if our EDITOR is set to vim
 bindkey -e
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
@@ -16,45 +13,40 @@ HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
 
+# Manual configuration
+PATH=/root/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/share/games:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
+
 # Use modern completion system
 autoload -Uz compinit
 compinit
 
-# ---| Correction  and Autocompletion |--- #
-zstyle ':completion:*' auto-description 'specify: %d'
-zstyle ':completion:*' completer _expand _complete _correct _approximate
-zstyle ':completion:*' format 'Completing %d'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' menu select=2
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-eval "$(dircolors -b)"
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
-zstyle ':completion:*' menu select=long
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle ':completion:*' use-compctl false
-zstyle ':completion:*' verbose true
+source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+# ---- zsh-autocomplete (historial automático) ----
+zstyle ':autocomplete:*' min-input 1
+zstyle ':autocomplete:*' delay 0.05
+zstyle ':autocomplete:*' list-lines 8
+zstyle ':autocomplete:*' recent-dirs true
+zstyle ':autocomplete:*' widget-style menu-select
+zstyle ':autocomplete:*' fzf yes
+zstyle ':autocomplete:*' auto-select true
+zstyle ':autocomplete:*' group-order 'history' 'commands' 'paths'
+zstyle ':autocomplete:*' ignore-case yes
 
-
-# Manual configuration
-
-PATH=/root/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/share/games:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
 
 # Plugins
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh-sudo/sudo.plugin.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # key bindings
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^[[3~" delete-char
 bindkey "^[[1;3D" backward-word
+
+# ---| Correction  and Autocompletion |--- #
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 # Manual aliases
 alias ls='lsd --group-dirs=first'
@@ -69,21 +61,7 @@ alias icat='kitty +kitten icat'
 alias pacs="pacman -Slq | fzf -m --preview 'pacman -Si {} ; pacman -Fl {} | awk \"{print \\$2}\"' | xargs -ro sudo pacman -S"
 alias mp3="ncmpcpp"
 
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# --- Autosuggestions ---
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(self-insert)
-ZSH_AUTOSUGGEST_USE_ASYNC=true
-HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=cyan,bold'
-HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='fg=red,bold'
-
-# Autosuggestions binddings
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-# bindkey '^E' autosuggest-accept
-# bindkey '^[[C' autosuggest-accept
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Change color for dir /mnt/
 export LS_COLORS="/mnt/*=32;46:$LS_COLORS"
@@ -134,8 +112,8 @@ function rmk(){
 	shred -zun 10 -v $1
 }
 
-# ---------------P R O M P T------------------
 # Init Starship
 eval "$(starship init zsh)"
+
 # Init Arch's Logo
 fastfetch
