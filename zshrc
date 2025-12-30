@@ -44,6 +44,12 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 PATH=/root/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/share/games:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
 
+# Plugins
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh-sudo/sudo.plugin.zsh
+
 # key bindings
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
@@ -63,28 +69,21 @@ alias icat='kitty +kitten icat'
 alias pacs="pacman -Slq | fzf -m --preview 'pacman -Si {} ; pacman -Fl {} | awk \"{print \\$2}\"' | xargs -ro sudo pacman -S"
 alias mp3="ncmpcpp"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# --- Autosuggestions estilo PowerShell ---
-# Estrategia: usar historial y completions
+# --- Autosuggestions ---
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-
-# Color de la sugerencia (gris tenue, como PowerShell)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-
-# Permitir aceptar sugerencias con Ctrl+E o la tecla End
-bindkey '^E' autosuggest-accept
-bindkey '^[[C' autosuggest-accept
-
-# Hacer que las sugerencias aparezcan inmediatamente al escribir
 ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(self-insert)
-
 ZSH_AUTOSUGGEST_USE_ASYNC=true
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=cyan,bold'
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='fg=red,bold'
 
-# Plugins
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh-sudo/sudo.plugin.zsh
+# Autosuggestions binddings
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+# bindkey '^E' autosuggest-accept
+# bindkey '^[[C' autosuggest-accept
 
 # Change color for dir /mnt/
 export LS_COLORS="/mnt/*=32;46:$LS_COLORS"
