@@ -152,18 +152,6 @@ sudo -u fuis18 bash -c 'paru -S bluetui'
 
 echo ""
 echo -e "${BLUE} ================================="
-echo -e "${GREEN} ==== Multimedia applications ===="
-echo -e "${BLUE} ================================="
-echo -e "${RESET}"
-
-pacman -S --noconfirm gst-libav gst-plugins-good gst-plugins-bad gst-plugins-ugly
-pacman -S --noconfirm pipewire pipewire-pulse wireplumber
-pacman -S --noconfirm pipewire-alsa alsa-utils
-pacman -S --noconfirm mpd mpc mpv ncmpcpp fftw lsp-plugins-lv2
-pacman -S --noconfirm pulsemixer cava easyeffects rubberband
-
-echo ""
-echo -e "${BLUE} ================================="
 echo -e "${GREEN} ====== Captura de Pantalla ======"
 echo -e "${BLUE} ================================="
 echo -e "${RESET}"
@@ -171,34 +159,10 @@ echo -e "${RESET}"
 pacman -S --noconfirm grim slurp swappy
 
 echo ""
-echo -e "${BLUE} ================================="
-echo -e "${GREEN} ======== Logo Arch Linux ========"
-echo -e "${BLUE}         .         "
-echo -e "               / \\       "
-echo -e "              /   \\      "
-echo -e "             /\    \\     "
-echo -e "            /  \    \\    "
-echo -e "           /         \\   "
-echo -e "          /    .-.    \\  "
-echo -e "         /    |   |   _\\ "
-echo -e "        /   _.'   '._   \\"
-echo -e "       /_.-'         '-._\\"
-echo -e "${RESET}"
-
-pacman -S --noconfirm fastfetch
-
-echo ""
-echo -e "${BLUE} =================================="
-echo -e "${GREEN} ====== Instalando el Editor ======"
-echo -e "${BLUE} =================================="
-echo -e "${RESET}"
-
-pacman -S --noconfirm vim neovim
-
-echo ""
 echo -e "${BLUE}=================================="
 echo -e "${GREEN}============= READY! ============="
 echo -e "${BLUE}=================================="
+echo -e "${RESET}"
 echo ""
 echo ""
 echo ""
