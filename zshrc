@@ -23,7 +23,7 @@ compinit
 source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 # ---- zsh-autocomplete (historial automático) ----
-zstyle ':autocomplete:*' min-input 1
+zstyle ':autocomplete:*' min-input 2
 zstyle ':autocomplete:*' delay 0.05
 zstyle ':autocomplete:*' list-lines 8
 zstyle ':autocomplete:*' recent-dirs true
@@ -32,7 +32,7 @@ zstyle ':autocomplete:*' fzf yes
 zstyle ':autocomplete:*' auto-select true
 zstyle ':autocomplete:*' group-order 'history' 'commands' 'paths'
 zstyle ':autocomplete:*' ignore-case yes
-
+zstyle ':autocomplete:*' ignored-input '^\e.*'
 
 # Plugins
 source /usr/share/zsh-sudo/sudo.plugin.zsh
@@ -43,6 +43,10 @@ bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^[[3~" delete-char
 bindkey "^[[1;3D" backward-word
+# No capturar SPACE (importante para WM keybinds)
+bindkey ' ' self-insert
+zstyle ':autocomplete:*' complete-word no
+
 
 # ---| Correction  and Autocompletion |--- #
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
