@@ -23,16 +23,25 @@ compinit
 source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 # ---- zsh-autocomplete (historial automático) ----
-zstyle ':autocomplete:*' min-input 2
+# Mostrar lista automáticamente al escribir
+zstyle ':autocomplete:*' min-input 1
 zstyle ':autocomplete:*' delay 0.05
+
+# NO activar con buffer vacío
+zstyle ':autocomplete:*' min-input 2
+# Lista visible debajo
 zstyle ':autocomplete:*' list-lines 8
-zstyle ':autocomplete:*' recent-dirs true
 zstyle ':autocomplete:*' widget-style menu-select
-zstyle ':autocomplete:*' fzf yes
-zstyle ':autocomplete:*' auto-select true
-zstyle ':autocomplete:*' group-order 'history' 'commands' 'paths'
-zstyle ':autocomplete:*' ignore-case yes
+# No activar por ESC / Meta (SUPER)
 zstyle ':autocomplete:*' ignored-input '^\e.*'
+# No auto-confirmar la primera opción
+zstyle ':autocomplete:*' auto-select false
+# Orden lógico
+zstyle ':autocomplete:*' group-order 'history' 'commands' 'paths'
+# Ignorar mayúsculas
+zstyle ':autocomplete:*' ignore-case yes
+
+zstyle ':autocomplete:*' recent-dirs true
 
 # Plugins
 source /usr/share/zsh-sudo/sudo.plugin.zsh
