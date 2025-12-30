@@ -40,7 +40,7 @@ inc_volume() {
     local vol new
     vol=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oE '[0-9]{1,3}%' | head -n1 | tr -d '%')
     new=$((vol + 5))
-    (( new > 100 )) && new=100
+    (( new > 150 )) && new=150
     pactl set-sink-volume @DEFAULT_SINK@ "${new}%"
 }
 
