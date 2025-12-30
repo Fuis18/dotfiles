@@ -31,17 +31,9 @@ bindkey '^[[C' autosuggest-accept
 # Autocomplete (list)
 source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
-# Mostrar lista automáticamente al escribir
-# zstyle ':autocomplete:*' min-input 1
-# zstyle ':autocomplete:*' delay 0.05
-
-# NO activar con buffer vacío
-#zstyle ':autocomplete:*' min-input 2
 # Lista visible debajo
 zstyle ':autocomplete:*' list-lines 8
 zstyle ':autocomplete:*' widget-style menu-select
-# No activar por ESC / Meta (SUPER)
-# zstyle ':autocomplete:*' ignored-input '^\e.*'
 # No auto-confirmar la primera opción
 zstyle ':autocomplete:*' auto-select false
 # Orden lógico
@@ -60,10 +52,6 @@ bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^[[3~" delete-char
 bindkey "^[[1;3D" backward-word
-
-# No capturar SPACE (importante para WM keybinds)
-# bindkey ' ' self-insert
-# zstyle ':autocomplete:*' complete-word no
 
 # ---| Correction  and Autocompletion |--- #
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
