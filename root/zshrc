@@ -1,10 +1,9 @@
 # Fix the Java Problem
 export _JAVA_AWT_WM_NONREPARENTING=1
-# Install Bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 
-# Enable history
+export SYSTEMD_PAGER=cat
+
+# Enable historyw
 setopt histignorealldups sharehistory
 
 # Use emacs keybindings even if our EDITOR is set to vim
@@ -59,8 +58,6 @@ alias lla='lsd -lha --group-dirs=first'
 alias cat='bat'
 # Images
 alias icat='kitty +kitten icat'
-# alias for wifi
-alias wifi="kitty nmtui"
 # alias for searching and installing packages
 alias pacs="pacman -Slq | fzf -m --preview 'pacman -Si {} ; pacman -Fl {} | awk \"{print \\$2}\"' | xargs -ro sudo pacman -S"
 
@@ -105,9 +102,6 @@ function extractPorts(){
 # man is a package that provides the manual pages for commands
 # Set 'man' colors
 function man() {
-    # Forzar español solo para man
-    LANG=es_ES.UTF-8 \
-    LC_MESSAGES=es_ES.UTF-8 \
     LESS_TERMCAP_mb=$'\e[01;31m' \
     LESS_TERMCAP_md=$'\e[01;31m' \
     LESS_TERMCAP_me=$'\e[0m' \
@@ -126,5 +120,3 @@ function rmk(){
 # ---------------P R O M P T------------------
 # Init Starship
 eval "$(starship init zsh)"
-
-export MANLANG=es

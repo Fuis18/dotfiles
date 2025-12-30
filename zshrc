@@ -2,9 +2,8 @@
 
 # Fix the Java Problem
 export _JAVA_AWT_WM_NONREPARENTING=1
-# Install Bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+
+export SYSTEMD_PAGER=cat
 
 # Enable history
 setopt histignorealldups sharehistory
@@ -48,9 +47,8 @@ PATH=/root/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/
 # key bindings
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
-bindkey "^[[3~" delete-char]]
-bindkey "^[[1;3C" forward-word
-bindkey "^[[1;3D" backward-word]]
+bindkey "^[[3~" delete-char
+bindkey "^[[1;3D" backward-word
 
 # Manual aliases
 alias ls='lsd --group-dirs=first'
@@ -61,13 +59,27 @@ alias lla='lsd -lha --group-dirs=first'
 alias cat='bat'
 # Images
 alias icat='kitty +kitten icat'
-# alias for wifi
-alias wifi="nmtui"
 # alias for searching and installing packages
 alias pacs="pacman -Slq | fzf -m --preview 'pacman -Si {} ; pacman -Fl {} | awk \"{print \\$2}\"' | xargs -ro sudo pacman -S"
 alias mp3="ncmpcpp"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# --- Autosuggestions estilo PowerShell ---
+# Estrategia: usar historial y completions
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
+# Color de la sugerencia (gris tenue, como PowerShell)
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+
+# Permitir aceptar sugerencias con Ctrl+E o la tecla End
+bindkey '^E' autosuggest-accept
+bindkey '^[[C' autosuggest-accept
+
+# Hacer que las sugerencias aparezcan inmediatamente al escribir
+ZSH_AUTOSUGGEST_ACCEPT_WIDGETS=(self-insert)
+
+ZSH_AUTOSUGGEST_USE_ASYNC=true
 
 # Plugins
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -108,9 +120,6 @@ function extractPorts(){
 # man is a package that provides the manual pages for commands
 # Set 'man' colors
 function man() {
-    # Forzar español solo para man
-    LANG=es_ES.UTF-8 \
-    LC_MESSAGES=es_ES.UTF-8 \
     LESS_TERMCAP_mb=$'\e[01;31m' \
     LESS_TERMCAP_md=$'\e[01;31m' \
     LESS_TERMCAP_me=$'\e[0m' \
@@ -131,5 +140,3 @@ function rmk(){
 eval "$(starship init zsh)"
 # Init Arch's Logo
 fastfetch
-
-export MANLANG=es
