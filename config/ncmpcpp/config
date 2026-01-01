@@ -1,6 +1,6 @@
-##
+# ncmpcpp/config
 # Files
-mpd_music_dir = ~/music
+mpd_music_dir = ~/Music
 lyrics_directory  = ~/.config/ncmpcpp/lyrics
 ncmpcpp_directory  = ~/.config/ncmpcpp
 mpd_host = "127.0.0.1"
