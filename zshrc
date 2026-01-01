@@ -26,7 +26,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 ZSH_AUTOSUGGEST_USE_ASYNC=true
 
-bindkey '^[[C' autosuggest-accept
+bindkey '^F' autosuggest-accept
 
 # Autocomplete (list)
 source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
@@ -42,6 +42,8 @@ zstyle ':autocomplete:*' group-order 'history' 'commands' 'paths'
 zstyle ':autocomplete:*' ignore-case yes
 
 zstyle ':autocomplete:*' recent-dirs true
+
+zstyle ':autocomplete:*' tilde true
 
 # Plugins
 source /usr/share/zsh-sudo/sudo.plugin.zsh
