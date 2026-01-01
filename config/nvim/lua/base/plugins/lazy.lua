@@ -14,3 +14,4 @@ end
 vim.opt.rtp:prepend(lazypath)
 plugins = require("configs.lazy")
 require("lazy").setup(plugins)
+require("configs.devicons")
