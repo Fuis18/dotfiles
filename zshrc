@@ -16,13 +16,15 @@ HISTFILE=~/.zsh_history
 # Manual configuration
 PATH=/root/.local/bin:/snap/bin:/usr/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/usr/share/games:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
 
+zstyle ':completion:*:*:pacman:*' ignored-patterns '*'
+
 # Use modern completion system
 autoload -Uz compinit
-compinit
+compinit -C
 
 # Autosuggestions (inline)
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_STRATEGY=(history)
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 ZSH_AUTOSUGGEST_USE_ASYNC=true
 
