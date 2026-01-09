@@ -12,10 +12,22 @@ USER_NAME="fuis18"
 USER_HOME="/home/${USER_NAME}"
 USER_REPOS="${USER_HOME}/Downloads/repos"
 FUIS_REPO="${USER_REPOS}/fuis18/dotfiles"
+PACMAN_CONF="/etc/pacman.conf"
 
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 RESET='\033[0m'
+
+NEW_CMD='XferCommand = /usr/bin/curl -L -C - --retry 10 --retry-delay 5 --connect-timeout 30 --max-time 0 -o %o %u'
+
+# Reemplazar si existe (comentado o no)
+if grep -qE '^[# ]*XferCommand\s*=' "$PACMAN_CONF"; then
+    sudo sed -i "s|^[# ]*XferCommand\s*=.*|$NEW_CMD|" "$PACMAN_CONF"
+else
+    # Agregar bajo [options]
+    sudo sed -i "/^\[options\]/a $NEW_CMD" "$PACMAN_CONF"
+fi
+
 
 echo ""
 echo -e "${BLUE} =================================="
@@ -31,7 +43,7 @@ echo -e "${GREEN} ===== Installing Base System ====="
 echo -e "${BLUE} =================================="
 echo -e "${RESET}"
 
-pacman -S --noconfirm base base-devel wayland hyprland hyprlock
+pacman -S --noconfirm base base-devel wayland hyprland hyprlock hypridle
 pacman -S --noconfirm qt6-base qt6-declarative qt6-quick3d qt6-graphs
 
 echo ""
@@ -40,6 +52,8 @@ echo -e "${GREEN} =========== AUR Helper ==========="
 echo -e "${BLUE} =================================="
 echo -e "${RESET}"
 echo ""
+
+chown -R "${USER_NAME}:${USER_NAME}" "${USER_HOME}/Downloads"
 
 echo ""
 echo -e "${BLUE} ================================="
@@ -84,6 +98,8 @@ sudo -u fuis18 bash -c 'paru -S papirus-folders-catppuccin-git catppuccin-gtk-th
 
 papirus-folders -C cat-mocha-blue --theme Papirus-Dark
 
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+gsettings set org.gnome.desktop.interface gtk-theme 'Catppuccin-Mocha-Standard-Blue-Dark'
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
 
 sudo -u fuis18 bash -c 'paru -S wlogout yofi-bin'
@@ -95,7 +111,7 @@ echo -e "${GREEN} ====== Installing Terminal ======"
 echo -e "${BLUE} ================================="
 echo -e "${RESET}"
 
-pacman -S --noconfirm kitty zsh starship zsh-syntax-highlighting zsh-autosuggestions
+pacman -S --noconfirm kitty zsh starship zsh-autocomplete zsh-autosuggestions zsh-syntax-highlighting
 
 pacman -S --noconfirm bat lsd fzf gnu-free-fonts
 
@@ -138,11 +154,10 @@ echo -e "${GREEN} ===== Network Configuration ====="
 echo -e "${BLUE} ================================="
 echo -e "${RESET}"
 
-systemctl enable NetworkManager
-systemctl start NetworkManager
-
 pacman -S --noconfirm wpa_supplicant bluez bluez-utils dbus
+pacman -S --noconfirm ufw
 
+systemctl enable NetworkManager
 systemctl enable wpa_supplicant
 systemctl start wpa_supplicant
 systemctl enable bluetooth
