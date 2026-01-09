@@ -27,7 +27,7 @@ echo ""
 echo -e "${BLUE} =================================="
 echo -e "${GREEN} ========== Applications =========="
 echo -e "${BLUE} =================================="
-echo ""
+echo -e "${RESET}"
 
 # multimedia
 pacman -S --noconfirm gimp inkscape blender

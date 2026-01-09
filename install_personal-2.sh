@@ -32,7 +32,7 @@ echo -e "${RESET}"
 # programación
 pacman -S --noconfirm docker docker-compose docker-buildx
 
-sudo -u fuis18 bash -c 'paru -S oxker'
+sudo -u fuis18 bash -c 'paru -S oxker-bin'
 
 systemctl enable docker.socket
 systemctl start docker.socket
@@ -40,7 +40,7 @@ systemctl start docker.socket
 sudo usermod -aG docker $USER_NAME
 
 # ofimatica
-sudo -u fuis18 bash -c 'paru -S obsidian'
+sudo -u fuis18 bash -c 'paru -S obsidian-bin'
 sudo -u fuis18 bash -c 'paru -S onlyoffice-bin'
 sudo pacman -S libreoffice-fresh
 
