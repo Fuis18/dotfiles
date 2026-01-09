@@ -37,7 +37,7 @@ pacman -S --noconfirm muse # musescore
 
 pacman -S --noconfirm discord
 
-sudo -u fuis18 bash -c 'yay -S cmatrix-git'
+sudo -u fuis18 bash -c 'paru -S cmatrix-git'
 
 echo ""
 echo -e "${BLUE} =================================="

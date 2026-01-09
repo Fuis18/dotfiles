@@ -27,21 +27,22 @@ echo ""
 echo -e "${BLUE} =================================="
 echo -e "${GREEN} ========== Applications =========="
 echo -e "${BLUE} =================================="
-echo ""
+echo -e "${RESET}"
 
 # programación
 pacman -S --noconfirm docker docker-compose docker-buildx
 
-paru -S oxker
+sudo -u fuis18 bash -c 'paru -S oxker'
+
+systemctl enable docker.socket
+systemctl start docker.socket
 
 sudo usermod -aG docker $USER_NAME
 
-sudo systemctl start nginx
-
 # ofimatica
-sudo -u fuis18 bash -c 'yay -S obsidian'
-sudo pacman -S libreoffice-still
-sudo -u fuis18 bash -c 'yay -S onlyoffice-bin'
+sudo -u fuis18 bash -c 'paru -S obsidian'
+sudo -u fuis18 bash -c 'paru -S onlyoffice-bin'
+sudo pacman -S libreoffice-fresh
 
 echo ""
 echo -e "${BLUE} =================================="
