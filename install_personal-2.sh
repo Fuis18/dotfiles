@@ -25,7 +25,15 @@ pacman -Syu --noconfirm
 
 echo ""
 echo -e "${BLUE} =================================="
-echo -e "${GREEN} ========== Applications =========="
+echo -e "${GREEN} ========== Development =========="
+echo -e "${BLUE} =================================="
+echo -e "${RESET}"
+
+pacman -S --noconfirm github-cli
+
+echo ""
+echo -e "${BLUE} =================================="
+echo -e "${GREEN} ========== Operations =========="
 echo -e "${BLUE} =================================="
 echo -e "${RESET}"
 
